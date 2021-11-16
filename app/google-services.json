@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "484180805578",
+    "project_id": "coffee2go-baf44",
+    "storage_bucket": "coffee2go-baf44.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:484180805578:android:a2bf8effe1f876b0093133",
+        "android_client_info": {
+          "package_name": "com.android.coffee2go"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "484180805578-j8a7496fp1jdjcaaq7j0hhvt0tnrc5c5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android.coffee2go",
+            "certificate_hash": "385cba9ebe037b0b4339130d59cf483a789cfac7"
+          }
+        },
+        {
+          "client_id": "484180805578-rkh34fhaoiqb938dq5kj8mugje1336sn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDW3EyAfM2J3aXgkI4GwZkXTcYNZZpuJGc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "484180805578-rkh34fhaoiqb938dq5kj8mugje1336sn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
