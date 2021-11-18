@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Coffee2go">
         <activity
+            android:name=".view.MenuActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.SignInActivity"
             android:exported="false" />
         <activity

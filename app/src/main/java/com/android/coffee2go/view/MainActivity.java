@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private MainActivityVM viewModel;
     private Button buttonRegister;
+    private Button buttonLogin;
     private ProgressBar progressBar;
     //private FirebaseAuth mAuth;
 
@@ -30,6 +31,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonRegister = findViewById(R.id.registerButton);
         buttonRegister.setOnClickListener(this);
 
+        buttonLogin = findViewById(R.id.buttonLogin);
+        buttonLogin.setOnClickListener(this);
         //mAuth = FirebaseAuth.getInstance();
 
         progressBar = findViewById(R.id.progressBar);
@@ -47,9 +50,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.registerButton:
+            {
                 Intent intent = new Intent(getApplicationContext(),RegisterActivity.class);
                 startActivity(intent);
                 break;
+            }
+            case R.id.buttonLogin:
+            {
+                Intent intent = new Intent(getApplicationContext(),MenuActivity.class);
+                startActivity(intent);
+                break;
+            }
         }
     }
 }
