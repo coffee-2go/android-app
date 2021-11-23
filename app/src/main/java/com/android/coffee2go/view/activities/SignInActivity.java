@@ -1,4 +1,4 @@
-package com.android.coffee2go.view;
+package com.android.coffee2go.view.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 

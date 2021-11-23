@@ -7,22 +7,22 @@
 
     <fragment
         android:id="@+id/menuFragment"
-        android:name="com.android.coffee2go.MenuFragment"
+        android:name="com.android.coffee2go.view.fragments.MenuFragment"
         android:label="fragment_menu"
         tools:layout="@layout/fragment_menu" />
     <fragment
         android:id="@+id/cartFragment"
-        android:name="com.android.coffee2go.CartFragment"
+        android:name="com.android.coffee2go.view.fragments.CartFragment"
         android:label="fragment_cart"
         tools:layout="@layout/fragment_cart" />
     <fragment
         android:id="@+id/locationFragment"
-        android:name="com.android.coffee2go.LocationFragment"
+        android:name="com.android.coffee2go.view.fragments.LocationFragment"
         android:label="fragment_location"
         tools:layout="@layout/fragment_location" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.android.coffee2go.ProfileFragment"
+        android:name="com.android.coffee2go.view.fragments.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>

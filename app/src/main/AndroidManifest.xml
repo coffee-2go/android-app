@@ -11,16 +11,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Coffee2go">
         <activity
-            android:name=".view.MenuActivity"
+            android:name=".view.activities.CategoryItemsActivity"
             android:exported="false" />
         <activity
-            android:name=".view.SignInActivity"
+            android:name=".view.activities.MenuActivity"
             android:exported="false" />
         <activity
-            android:name=".view.RegisterActivity"
+            android:name=".view.activities.SignInActivity"
             android:exported="false" />
         <activity
-            android:name=".view.MainActivity"
+            android:name=".view.activities.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
