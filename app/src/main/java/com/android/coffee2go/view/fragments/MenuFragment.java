@@ -1,5 +1,6 @@
-package com.android.coffee2go;
+package com.android.coffee2go.view.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,8 +11,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.coffee2go.R;
 import com.android.coffee2go.models.MenuItem;
-import com.android.coffee2go.viewmodels.MenuListAdapter;
+import com.android.coffee2go.view.activities.CategoryItemsActivity;
+import com.android.coffee2go.viewmodels.adapters.MenuListAdapter;
+import com.android.coffee2go.viewmodels.OnListItemClickListener;
 
 import java.util.ArrayList;
 
@@ -20,7 +24,7 @@ import java.util.ArrayList;
  * Use the {@link MenuFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MenuFragment extends Fragment {
+public class MenuFragment extends Fragment implements OnListItemClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -82,8 +86,16 @@ public class MenuFragment extends Fragment {
         items.add(new MenuItem("Sandwiches",R.drawable.sandwiches));
         items.add(new MenuItem("Bakery",R.drawable.bakery));
         items.add(new MenuItem("Snacks",R.drawable.snacks));
-        mMenuAdapter = new MenuListAdapter(items);
+        mMenuAdapter = new MenuListAdapter(items,this);
         mMenuList.setAdapter(mMenuAdapter);
         return view;
+    }
+
+    @Override
+    public void onListItemClick(int clickedItemIndex) {
+        if (clickedItemIndex == 0){
+            Intent intent = new Intent(getActivity(), CategoryItemsActivity.class);
+            startActivity(intent);
+        }
     }
 }

@@ -1,20 +1,14 @@
-package com.android.coffee2go.view;
+package com.android.coffee2go.view.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-
 import android.os.Bundle;
-
+import android.widget.Toast;
 import com.android.coffee2go.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.util.HashSet;
-import java.util.Set;
 
 public class MenuActivity extends AppCompatActivity {
 

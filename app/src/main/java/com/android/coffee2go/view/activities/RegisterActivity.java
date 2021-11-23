@@ -1,4 +1,4 @@
-package com.android.coffee2go.view;
+package com.android.coffee2go.view.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -10,16 +10,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.android.coffee2go.R;
 import com.android.coffee2go.models.Account;
 import com.android.coffee2go.viewmodels.RegisterVM;
 import com.android.coffee2go.viewmodels.RegisterVMImpl;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.Objects;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
 

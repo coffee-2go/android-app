@@ -1,4 +1,4 @@
-package com.android.coffee2go.view;
+package com.android.coffee2go.view.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -10,8 +10,6 @@ import android.widget.ProgressBar;
 
 import com.android.coffee2go.R;
 import com.android.coffee2go.viewmodels.MainActivityVM;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
