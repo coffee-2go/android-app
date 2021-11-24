@@ -5,4 +5,5 @@
     <string name="hot_coffees">Hot Coffees</string>
     <string name="cappuccino">Cappuccino</string>
     <string name="add_to_cart">Add to Cart</string>
+    <string name="quantity">Quantity</string>
 </resources>
