@@ -25,7 +25,7 @@ public class CategoryItemsActivity extends AppCompatActivity implements OnListIt
         categoryItems.hasFixedSize();
         categoryItems.setLayoutManager(new LinearLayoutManager(this));
 
-        //TODO Store menu items or find a proper place where to instantiate the objects
+        //TODO Store menu items in database or find a proper place where to instantiate the objects
         ArrayList<MenuItem> menuItems = new ArrayList<>();
         menuItems.add(new MenuItem("Cappuccino",R.drawable.cappuccino));
         menuItems.add(new MenuItem("Espresso",R.drawable.espresso));
