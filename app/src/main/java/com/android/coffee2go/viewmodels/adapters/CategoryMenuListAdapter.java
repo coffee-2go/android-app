@@ -11,9 +11,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.coffee2go.R;
 import com.android.coffee2go.models.MenuItem;
 import com.android.coffee2go.models.OrderLine;
+import com.android.coffee2go.persistence.TransactionRepository;
 import com.android.coffee2go.viewmodels.OnListItemClickListener;
 import java.util.ArrayList;
 
+/**
+ * @author Michal Pupák
+ * **/
 public class CategoryMenuListAdapter extends RecyclerView.Adapter<CategoryMenuListAdapter.ViewHolder> {
     private ArrayList<MenuItem> items;
     final private OnListItemClickListener mOnListItemClickListener;
@@ -86,6 +90,7 @@ public class CategoryMenuListAdapter extends RecyclerView.Adapter<CategoryMenuLi
             buttonAddToCart.setOnClickListener(c -> {
                 OrderLine orderLine = new OrderLine(items.get(getAdapterPosition()),quantityCounter);
                 Log.i("ADD TO CART BUTTON",orderLine.toString());
+                TransactionRepository.getInstance().getTransaction().addOrderLine(orderLine);
             });
         }
 

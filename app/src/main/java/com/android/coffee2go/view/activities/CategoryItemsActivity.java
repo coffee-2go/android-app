@@ -10,6 +10,9 @@ import com.android.coffee2go.viewmodels.adapters.CategoryMenuListAdapter;
 import com.android.coffee2go.viewmodels.OnListItemClickListener;
 import java.util.ArrayList;
 
+/**
+ * @author Michal Pupák
+ * **/
 //TODO Attach bottom navigation to the activity, make an option for a customer to go back
 //TODO Make a drop down with product details or create new activity with product's details
 //TODO Make the activity display the list of items corresponding to activity which was clicked

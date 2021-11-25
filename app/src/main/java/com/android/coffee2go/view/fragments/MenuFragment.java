@@ -2,21 +2,19 @@ package com.android.coffee2go.view.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.android.coffee2go.R;
 import com.android.coffee2go.models.MenuItem;
 import com.android.coffee2go.view.activities.CategoryItemsActivity;
 import com.android.coffee2go.viewmodels.adapters.MenuListAdapter;
 import com.android.coffee2go.viewmodels.OnListItemClickListener;
-
 import java.util.ArrayList;
 
 /**
@@ -24,6 +22,10 @@ import java.util.ArrayList;
  * Use the {@link MenuFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+
+/**
+ * @author Michal Pupák
+ * **/
 public class MenuFragment extends Fragment implements OnListItemClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
@@ -91,11 +93,19 @@ public class MenuFragment extends Fragment implements OnListItemClickListener {
         return view;
     }
 
+    //TODO open all categories
     @Override
     public void onListItemClick(int clickedItemIndex) {
         if (clickedItemIndex == 0){
             Intent intent = new Intent(getActivity(), CategoryItemsActivity.class);
             startActivity(intent);
         }
+
+//        Fragment fragment = new CategoryItemsFragment();
+//        FragmentManager fragmentManager= getFragmentManager();
+//        FragmentTransaction fragmentTransaction =fragmentManager.beginTransaction();
+//        fragmentTransaction.replace(R.id.fragmentContainerView,fragment,"tag");
+//        fragmentTransaction.addToBackStack(null);
+//        fragmentTransaction.commit();
     }
 }

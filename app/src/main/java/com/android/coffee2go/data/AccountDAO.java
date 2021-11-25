@@ -5,6 +5,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+/**
+ * @author Michal Pupák
+ * **/
 public class AccountDAO {
     private DatabaseReference reference;
     private static AccountDAO instance;

@@ -1,5 +1,8 @@
 package com.android.coffee2go.models;
 
+/**
+ * @author Michal Pupák
+ * **/
 public class OrderLine {
     private MenuItem product;
     private int quantity;

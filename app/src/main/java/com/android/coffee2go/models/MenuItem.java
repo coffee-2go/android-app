@@ -2,6 +2,9 @@ package com.android.coffee2go.models;
 
 import java.util.ArrayList;
 
+/**
+ * @author Michal Pupák
+ * **/
 public class MenuItem{
     private String mName;
     private int mIconId;

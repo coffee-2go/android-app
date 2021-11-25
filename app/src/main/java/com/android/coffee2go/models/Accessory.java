@@ -1,5 +1,8 @@
 package com.android.coffee2go.models;
 
+/**
+ * @author Michal Pupák
+ * **/
 public class Accessory {
     private String name;
     private double unitPrice;

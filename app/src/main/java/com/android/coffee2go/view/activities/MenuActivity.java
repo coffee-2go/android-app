@@ -9,6 +9,10 @@ import android.os.Bundle;
 import com.android.coffee2go.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+/**
+ * @author Michal Pupák
+ * **/
+
 public class MenuActivity extends AppCompatActivity {
 
     @Override
@@ -17,7 +21,6 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        //NavController navController = Navigation.findNavController(this,R.id.fragmentContainerView);
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration
                 .Builder(R.id.menuFragment,R.id.cartFragment,R.id.locationFragment,R.id.profileFragment).build();
@@ -30,9 +33,6 @@ public class MenuActivity extends AppCompatActivity {
 
             // Setup NavigationUI here
             NavigationUI.setupWithNavController(bottomNavigationView, navController);
-            //NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-            //NavigationUI.setupWithNavController(bottomNavigationView, navController);
-
         }
 
     }

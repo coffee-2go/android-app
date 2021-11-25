@@ -6,4 +6,5 @@
     <string name="cappuccino">Cappuccino</string>
     <string name="add_to_cart">Add to Cart</string>
     <string name="quantity">Quantity</string>
+    <string name="remove">Remove</string>
 </resources>

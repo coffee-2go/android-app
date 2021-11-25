@@ -3,20 +3,18 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/red_coffee"
-    android:gravity="center_vertical"
-    android:orientation="vertical"
-    android:layout_margin="2dp">
+    android:gravity="center"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <TextView
             android:id="@+id/orderLine_productName"
-            android:layout_width="wrap_content"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:text="Cappuccino"
-            android:textSize="25sp"
-            android:layout_margin="10dp"
+            android:autoSizeTextType="uniform"            android:layout_margin="10dp"
             android:gravity="center"
             android:textColor="@color/textWhite"
             />
@@ -43,15 +41,14 @@
             android:textColor="@color/textWhite"
             />
 
-        <TextView
-            android:id="@+id/orderLine_TotalPrice"
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/orderLine_Remove"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="70 DKK"
-            android:textSize="25sp"
-            android:layout_margin="10dp"
-            android:gravity="center"
-            android:textColor="@color/textWhite"
-            />
+            android:backgroundTint="#FA6363"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:text="@string/remove" />
+
     </LinearLayout>
 </LinearLayout>
