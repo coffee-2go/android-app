@@ -48,46 +48,43 @@ public class RegisterActivity extends AppCompatActivity {
 
         // check registration and register
         progressBar.setVisibility(View.GONE);
-        buttonRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        buttonRegister.setOnClickListener(view -> {
 
-                String username = editUsername.getText().toString().trim();
-                String email = editEmail.getText().toString().trim();
-                String password = editPassword.getText().toString().trim();
+            String username = editUsername.getText().toString().trim();
+            String email = editEmail.getText().toString().trim();
+            String password = editPassword.getText().toString().trim();
 
-                if (!username.isEmpty()) {
-                    if (!email.isEmpty()) {
-                        if (!password.isEmpty()) {
-                            if (Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                                if (password.length() > 6) {
+            if (!username.isEmpty()) {
+                if (!email.isEmpty()) {
+                    if (!password.isEmpty()) {
+                        if (Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                            if (password.length() > 6) {
 
-                                    Account account = new Account();
-                                    account.setUsername(username);
-                                    account.setEmail(email);
-                                    account.setPassword(password);
-                                    register(account);
+                                Account account = new Account();
+                                account.setUsername(username);
+                                account.setEmail(email);
+                                account.setPassword(password);
+                                register(account);
 
-                                } else {
-                                    editPassword.setError("Password must be at least 6 characters long!");
-                                    editPassword.requestFocus();
-                                }
                             } else {
-                                editEmail.setError("Please provide valid email!");
-                                editEmail.requestFocus();
+                                editPassword.setError("Password must be at least 6 characters long!");
+                                editPassword.requestFocus();
                             }
                         } else {
-                            editPassword.setError("Password is required!");
-                            editPassword.requestFocus();
+                            editEmail.setError("Please provide valid email!");
+                            editEmail.requestFocus();
                         }
                     } else {
-                        editEmail.setError("Email is required!");
-                        editEmail.requestFocus();
+                        editPassword.setError("Password is required!");
+                        editPassword.requestFocus();
                     }
                 } else {
-                    editUsername.setError("Username is required!");
-                    editUsername.requestFocus();
+                    editEmail.setError("Email is required!");
+                    editEmail.requestFocus();
                 }
+            } else {
+                editUsername.setError("Username is required!");
+                editUsername.requestFocus();
             }
         });
 
@@ -103,38 +100,35 @@ public class RegisterActivity extends AppCompatActivity {
                 account.getPassword()
         ).addOnCompleteListener(
                 this,
-                new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
+                task -> {
 
-                        if ( task.isSuccessful() ) {
-                            progressBar.setVisibility(View.GONE);
-                            Toast.makeText(RegisterActivity.this,
-                                    "Account created successfully!",
-                                    Toast.LENGTH_SHORT).show();
+                    if ( task.isSuccessful() ) {
+                        progressBar.setVisibility(View.GONE);
+                        Toast.makeText(RegisterActivity.this,
+                                "Account created successfully!",
+                                Toast.LENGTH_SHORT).show();
 
-                            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                            finish();
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        finish();
 
-                        } else {
-                            progressBar.setVisibility(View.GONE);
-                            String errorException;
-                            try {
-                                throw task.getException();
-                            } catch (FirebaseAuthWeakPasswordException e) {
-                                errorException = "Please type a stronger password!";
-                            } catch (FirebaseAuthUserCollisionException e) {
-                                errorException = "This account has been already registered!";
-                            } catch (FirebaseAuthInvalidCredentialsException e) {
-                                errorException = "Please type a valid email!";
-                            } catch (Exception e) {
-                                errorException = "when registering a account: " + e.getMessage();
-                                e.printStackTrace();
-                            }
-
-                            Toast.makeText(RegisterActivity.this, "Error: " + errorException,
-                                    Toast.LENGTH_SHORT).show();
+                    } else {
+                        progressBar.setVisibility(View.GONE);
+                        String errorException;
+                        try {
+                            throw task.getException();
+                        } catch (FirebaseAuthWeakPasswordException e) {
+                            errorException = "Please type a stronger password!";
+                        } catch (FirebaseAuthUserCollisionException e) {
+                            errorException = "This account has been already registered!";
+                        } catch (FirebaseAuthInvalidCredentialsException e) {
+                            errorException = "Please type a valid email!";
+                        } catch (Exception e) {
+                            errorException = "when registering a account: " + e.getMessage();
+                            e.printStackTrace();
                         }
+
+                        Toast.makeText(RegisterActivity.this, "Error: " + errorException,
+                                Toast.LENGTH_SHORT).show();
                     }
                 }
         );

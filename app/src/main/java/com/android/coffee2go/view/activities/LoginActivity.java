@@ -36,45 +36,39 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        //verifyLoggedAccount();
+        verifyLoggedAccount();
         initComponents();
 
         viewModel = new ViewModelProvider(this).get(LoginActivityVM.class);
         viewModel.init();
 
         // register
-        buttonRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
-                startActivity(intent);
-            }
+        buttonRegister.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
+            startActivity(intent);
         });
 
         // login
         progressBar.setVisibility(View.GONE);
-        buttonLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String email = editEmail.getText().toString().trim();
-                String password = editPassword.getText().toString().trim();
+        buttonLogin.setOnClickListener(view -> {
+            String email = editEmail.getText().toString().trim();
+            String password = editPassword.getText().toString().trim();
 
-                if (!email.isEmpty()) {
-                    if (!password.isEmpty()) {
+            if (!email.isEmpty()) {
+                if (!password.isEmpty()) {
 
-                        account = new Account();
-                        account.setEmail(email);
-                        account.setPassword(password);
-                        validateLogin(account);
+                    account = new Account();
+                    account.setEmail(email);
+                    account.setPassword(password);
+                    validateLogin(account);
 
-                    } else {
-                        editPassword.setError("Please provide a password!");
-                        editPassword.requestFocus();
-                    }
                 } else {
-                    editEmail.setError("Please provide an email!");
-                    editEmail.requestFocus();
+                    editPassword.setError("Please provide a password!");
+                    editPassword.requestFocus();
                 }
+            } else {
+                editEmail.setError("Please provide an email!");
+                editEmail.requestFocus();
             }
         });
     }
@@ -85,19 +79,16 @@ public class LoginActivity extends AppCompatActivity {
         auth.signInWithEmailAndPassword(
                 account.getEmail(),
                 account.getPassword()
-        ).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
+        ).addOnCompleteListener(task -> {
 
-                if ( task.isSuccessful() ) {
-                    progressBar.setVisibility(View.GONE);
-                    startActivity(new Intent(getApplicationContext(), MenuActivity.class));
-                    finish();
-                } else {
-                    Toast.makeText(LoginActivity.this,
-                            "Error when trying to login", Toast.LENGTH_SHORT).show();
-                    progressBar.setVisibility(View.GONE);
-                }
+            if ( task.isSuccessful() ) {
+                progressBar.setVisibility(View.GONE);
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                finish();
+            } else {
+                Toast.makeText(LoginActivity.this,
+                        "Error when trying to login", Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.GONE);
             }
         });
     }
@@ -105,7 +96,7 @@ public class LoginActivity extends AppCompatActivity {
     public void verifyLoggedAccount() {
         auth = FirebaseConfig.getFirebaseAuth();
         if (auth.getCurrentUser() != null) {
-            startActivity(new Intent(getApplicationContext(), MenuActivity.class));
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
             finish();
         }
     }
