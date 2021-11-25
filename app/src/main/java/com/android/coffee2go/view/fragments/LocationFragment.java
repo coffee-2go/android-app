@@ -15,6 +15,10 @@ import com.android.coffee2go.R;
  * Use the {@link LocationFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+
+/**
+ * @author Michal Pupák
+ * **/
 public class LocationFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match

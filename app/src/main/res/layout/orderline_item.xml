@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/red_coffee"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/orderLine_productName"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Cappuccino"
+            android:autoSizeTextType="uniform"            android:layout_margin="10dp"
+            android:gravity="center"
+            android:textColor="@color/textWhite"
+            />
+
+        <TextView
+            android:id="@+id/orderLine_Quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2x"
+            android:textSize="25sp"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:textColor="@color/textWhite"
+            />
+
+        <TextView
+            android:id="@+id/orderLine_UnitPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="35 DKK"
+            android:textSize="25sp"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:textColor="@color/textWhite"
+            />
+
+        <Button
+            android:id="@+id/orderLine_Remove"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FA6363"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:text="@string/remove" />
+
+    </LinearLayout>
+</LinearLayout>

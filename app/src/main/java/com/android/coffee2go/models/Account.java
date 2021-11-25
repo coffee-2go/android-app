@@ -1,5 +1,8 @@
 package com.android.coffee2go.models;
 
+/**
+ * @author Michal Pupák
+ * **/
 public class Account {
     private String username;
     private String email;

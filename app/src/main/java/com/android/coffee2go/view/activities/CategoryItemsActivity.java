@@ -10,6 +10,9 @@ import com.android.coffee2go.viewmodels.adapters.CategoryMenuListAdapter;
 import com.android.coffee2go.viewmodels.OnListItemClickListener;
 import java.util.ArrayList;
 
+/**
+ * @author Michal Pupák
+ * **/
 //TODO Attach bottom navigation to the activity, make an option for a customer to go back
 //TODO Make a drop down with product details or create new activity with product's details
 //TODO Make the activity display the list of items corresponding to activity which was clicked
@@ -25,7 +28,7 @@ public class CategoryItemsActivity extends AppCompatActivity implements OnListIt
         categoryItems.hasFixedSize();
         categoryItems.setLayoutManager(new LinearLayoutManager(this));
 
-        //TODO Store menu items or find a proper place where to instantiate the objects
+        //TODO Store menu items in database or find a proper place where to instantiate the objects
         ArrayList<MenuItem> menuItems = new ArrayList<>();
         menuItems.add(new MenuItem("Cappuccino",R.drawable.cappuccino));
         menuItems.add(new MenuItem("Espresso",R.drawable.espresso));
