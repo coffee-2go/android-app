@@ -10,11 +10,11 @@ import com.android.coffee2go.persistence.AccountRepository;
 //
 //import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivityVM extends AndroidViewModel {
+public class LoginActivityVM extends AndroidViewModel {
 
     private final AccountRepository accountRepository;
 
-    public MainActivityVM(@NonNull Application application) {
+    public LoginActivityVM(@NonNull Application application) {
         super(application);
         accountRepository = AccountRepository.getInstance();
     }
