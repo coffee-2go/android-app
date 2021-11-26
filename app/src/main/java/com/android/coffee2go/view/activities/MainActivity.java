@@ -1,63 +1,62 @@
 package com.android.coffee2go.view.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.appcompat.widget.Toolbar;
+
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ProgressBar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+
 import com.android.coffee2go.R;
-import com.android.coffee2go.viewmodels.MainActivityVM;
+import com.android.coffee2go.helper.FirebaseConfig;
+import com.google.firebase.auth.FirebaseAuth;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity {
 
-    private MainActivityVM viewModel;
-    private Button buttonRegister;
-    private Button buttonLogin;
-    private ProgressBar progressBar;
-    //private FirebaseAuth mAuth;
+    private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        viewModel = new ViewModelProvider(this).get(MainActivityVM.class);
-        viewModel.init();
         setContentView(R.layout.activity_main);
 
-        buttonRegister = findViewById(R.id.registerButton);
-        buttonRegister.setOnClickListener(this);
+        // config toolbar
+        Toolbar toolbar = findViewById(R.id.toolbarMain);
+        toolbar.setTitle("Coffeee2go");
+        setSupportActionBar(toolbar);
 
-        buttonLogin = findViewById(R.id.buttonLogin);
-        buttonLogin.setOnClickListener(this);
-        //mAuth = FirebaseAuth.getInstance();
-
-        progressBar = findViewById(R.id.progressBar);
-        progressBar.setVisibility(View.INVISIBLE);
+        // config object
+        auth = FirebaseConfig.getFirebaseAuth();
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        //TODO Check if user is signed in (non-null) and update UI accordingly.
-        //FirebaseUser currentUser = mAuth.getCurrentUser();
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_top, menu);
+
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.registerButton:
-            {
-                Intent intent = new Intent(getApplicationContext(),RegisterActivity.class);
-                startActivity(intent);
-                break;
-            }
-            case R.id.buttonLogin:
-            {
-                Intent intent = new Intent(getApplicationContext(),MenuActivity.class);
-                startActivity(intent);
-                break;
-            }
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if (item.getItemId() == R.id.menu_logout) {
+            signOut();
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void signOut() {
+        try {
+            auth.signOut();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

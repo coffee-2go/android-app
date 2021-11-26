@@ -7,4 +7,12 @@
     <string name="add_to_cart">Add to Cart</string>
     <string name="quantity">Quantity</string>
     <string name="remove">Remove</string>
+    <string name="coffee2go">Coffee2Go</string>
+    <string name="email">E-mail</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="not_a_user_yet">Not a user yet?</string>
+    <string name="register">Register</string>
+    <string name="username">Username</string>
+    <string name="logout">Logout</string>
 </resources>

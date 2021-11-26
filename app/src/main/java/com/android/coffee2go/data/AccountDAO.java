@@ -18,7 +18,7 @@ public class AccountDAO {
         reference = database.getReference(Account.class.getSimpleName());
     }
 
-    public static AccountDAO getInstance() {
+    public static synchronized AccountDAO getInstance() {
         if (instance == null){
             instance = new AccountDAO();
         }
