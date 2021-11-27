@@ -4,15 +4,21 @@ import androidx.lifecycle.ViewModel;
 
 import com.android.coffee2go.models.MenuItem;
 import com.android.coffee2go.models.OrderLine;
+import com.android.coffee2go.persistence.MenuItemsRepository;
 import com.android.coffee2go.persistence.TransactionRepository;
-
 import java.util.ArrayList;
+import java.util.List;
 
 public class CategoryItemsVMImpl extends ViewModel implements CategoryItemsVM {
+    private MenuItemsRepository repository;
+
+    public CategoryItemsVMImpl() {
+        repository = MenuItemsRepository.getInstance();
+    }
 
     @Override
-    public ArrayList<MenuItem> getCategoryItems() {
-        return null;
+    public List<MenuItem> getCategoryItems(int position) {
+        return repository.getCategoryItems(position);
     }
 
     @Override

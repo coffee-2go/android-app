@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.android.coffee2go.R;
 import com.android.coffee2go.models.MenuItem;
+import com.android.coffee2go.viewmodels.MenuVM;
 import com.android.coffee2go.viewmodels.OnListItemClickListener;
 import java.util.ArrayList;
 
@@ -18,10 +19,13 @@ import java.util.ArrayList;
 public class MenuListAdapter extends RecyclerView.Adapter<MenuListAdapter.ViewHolder> {
     private ArrayList<MenuItem> items;
     final private OnListItemClickListener mOnListItemClickListener;
+    private MenuVM menuVM;
 
-    public MenuListAdapter(ArrayList<MenuItem> items, OnListItemClickListener listener) {
-        this.items = items;
+    public MenuListAdapter(MenuVM menuVM, OnListItemClickListener listener) {
+        this.menuVM = menuVM;
         mOnListItemClickListener = listener;
+
+        items = (ArrayList<MenuItem>) menuVM.getCategories();
     }
 
     @NonNull
