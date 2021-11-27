@@ -9,11 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.android.coffee2go.R;
-import com.android.coffee2go.models.MenuItem;
-import com.android.coffee2go.models.OrderLine;
 import com.android.coffee2go.viewmodels.OnListItemClickListener;
-import com.android.coffee2go.viewmodels.adapters.OrderLineListAdapter;
-import java.util.ArrayList;
+import com.android.coffee2go.view.adapters.OrderLineListAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
