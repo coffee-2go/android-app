@@ -1,4 +1,4 @@
-package com.android.coffee2go.viewmodels.adapters;
+package com.android.coffee2go.view.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
