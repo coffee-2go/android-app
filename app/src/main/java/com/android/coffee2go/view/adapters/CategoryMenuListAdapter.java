@@ -27,10 +27,11 @@ public class CategoryMenuListAdapter extends RecyclerView.Adapter<CategoryMenuLi
     final private OnListItemClickListener mOnListItemClickListener;
     private CategoryItemsVM categoryItemsVM;
 
-    public CategoryMenuListAdapter(ArrayList<MenuItem> items, OnListItemClickListener listener) {
-        this.items = items;
+    public CategoryMenuListAdapter(CategoryItemsVM categoryItemsVM, int position, OnListItemClickListener listener) {
+        this.categoryItemsVM = categoryItemsVM;
         mOnListItemClickListener = listener;
-        //items = categoryItemsVM.getCategoryItems();
+
+        items = (ArrayList<MenuItem>) categoryItemsVM.getCategoryItems(position);
     }
 
     @NonNull

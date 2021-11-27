@@ -7,8 +7,15 @@ import java.util.List;
 
 public class MenuItemsRepository {
     private static MenuItemsRepository instance;
-    private List<MenuItem> menuItems;
-    private List<MenuItem> categories;
+    private final List<MenuItem> hotCoffeeMenuItems;
+    private final List<MenuItem> coldCoffeeMenuItems;
+    private final List<MenuItem> hotDrinksMenuItems;
+    private final List<MenuItem> coldDrinkMenuItems;
+    private final List<MenuItem> breakfastMenuItems;
+    private final List<MenuItem> sandwichesMenuItems;
+    private final List<MenuItem> bakeryMenuItems;
+    private final List<MenuItem> snacksMenuItems;
+    private final List<MenuItem> categories;
 
 
     private MenuItemsRepository(){
@@ -22,14 +29,22 @@ public class MenuItemsRepository {
         categories.add(new MenuItem("Bakery",R.drawable.bakery));
         categories.add(new MenuItem("Snacks",R.drawable.snacks));
 
-        menuItems = new ArrayList<>();
-        menuItems.add(new MenuItem("Cappuccino",R.drawable.cappuccino));
-        menuItems.add(new MenuItem("Espresso",R.drawable.espresso));
-        menuItems.add(new MenuItem("Caffe Americano",R.drawable.caffe_americano));
-        menuItems.add(new MenuItem("Caffe Misto",R.drawable.caffe_misto));
-        menuItems.add(new MenuItem("Caramel Macchiato",R.drawable.caramel_macchiato));
-        menuItems.add(new MenuItem("Flat White",R.drawable.flat_white));
-        menuItems.add(new MenuItem("Cappuccino",R.drawable.caffe_mocha));
+        hotCoffeeMenuItems = new ArrayList<>();
+        hotCoffeeMenuItems.add(new MenuItem("Cappuccino",R.drawable.cappuccino));
+        hotCoffeeMenuItems.add(new MenuItem("Espresso",R.drawable.espresso));
+        hotCoffeeMenuItems.add(new MenuItem("Caffe Americano",R.drawable.caffe_americano));
+        hotCoffeeMenuItems.add(new MenuItem("Caffe Misto",R.drawable.caffe_misto));
+        hotCoffeeMenuItems.add(new MenuItem("Caramel Macchiato",R.drawable.caramel_macchiato));
+        hotCoffeeMenuItems.add(new MenuItem("Flat White",R.drawable.flat_white));
+        hotCoffeeMenuItems.add(new MenuItem("Cappuccino",R.drawable.caffe_mocha));
+
+        coldCoffeeMenuItems = new ArrayList<>();
+        hotDrinksMenuItems = new ArrayList<>();
+        coldDrinkMenuItems = new ArrayList<>();
+        breakfastMenuItems = new ArrayList<>();
+        sandwichesMenuItems = new ArrayList<>();
+        bakeryMenuItems = new ArrayList<>();
+        snacksMenuItems = new ArrayList<>();
     }
 
     public static synchronized MenuItemsRepository getInstance(){
@@ -41,5 +56,40 @@ public class MenuItemsRepository {
 
     public List<MenuItem> getCategories() {
         return categories;
+    }
+
+
+    public List<MenuItem> getCategoryItems(int position) {
+        switch (position){
+            case 0:
+            {
+                return hotCoffeeMenuItems;
+            }
+            case 1:
+            {
+                return coldCoffeeMenuItems;
+            }
+            case 2:
+            {
+                return hotDrinksMenuItems;
+            }case 3:
+            {
+                return coldDrinkMenuItems;
+            }case 4:
+            {
+                return breakfastMenuItems;
+            }case 5:
+            {
+                return sandwichesMenuItems;
+            }case 6:
+            {
+                return bakeryMenuItems;
+            }case 7:
+            {
+                return snacksMenuItems;
+            }
+            default:
+                throw new IllegalStateException("Unexpected value: " + position);
+        }
     }
 }
