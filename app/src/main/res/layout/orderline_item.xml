@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/red_coffee"
@@ -17,7 +18,7 @@
             android:autoSizeTextType="uniform"            android:layout_margin="10dp"
             android:gravity="center"
             android:textColor="@color/textWhite"
-            />
+            tools:targetApi="o" />
 
         <TextView
             android:id="@+id/orderLine_Quantity"
@@ -43,11 +44,11 @@
 
         <Button
             android:id="@+id/orderLine_Remove"
-            android:layout_width="100dp"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:backgroundTint="#FA6363"
+            android:layout_marginLeft="50dp"
             android:layout_marginTop="5dp"
-            android:layout_marginLeft="5dp"
+            android:backgroundTint="#FA6363"
             android:text="@string/remove" />
 
     </LinearLayout>

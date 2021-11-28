@@ -7,9 +7,11 @@ import java.util.ArrayList;
  * **/
 public class Transaction {
     private ArrayList<OrderLine> orderLines;
+    private int accountId;
 
     public Transaction() {
         orderLines = new ArrayList<>();
+
     }
 
     public void addOrderLine(OrderLine orderLine){
@@ -22,5 +24,9 @@ public class Transaction {
 
     public void setOrderLines(ArrayList<OrderLine> orderLines) {
         this.orderLines = orderLines;
+    }
+
+    public int getAccountId() {
+        return accountId;
     }
 }

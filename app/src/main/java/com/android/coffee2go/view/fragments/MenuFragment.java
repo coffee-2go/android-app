@@ -3,8 +3,7 @@ package com.android.coffee2go.view.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,7 +12,8 @@ import android.view.ViewGroup;
 import com.android.coffee2go.R;
 import com.android.coffee2go.models.MenuItem;
 import com.android.coffee2go.view.activities.CategoryItemsActivity;
-import com.android.coffee2go.viewmodels.adapters.MenuListAdapter;
+import com.android.coffee2go.view.adapters.MenuListAdapter;
+import com.android.coffee2go.viewmodels.MenuVM;
 import com.android.coffee2go.viewmodels.OnListItemClickListener;
 import java.util.ArrayList;
 
@@ -79,16 +79,9 @@ public class MenuFragment extends Fragment implements OnListItemClickListener {
         mMenuList.hasFixedSize();
         mMenuList.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
-        ArrayList<MenuItem> items = new ArrayList<>();
-        items.add(new MenuItem("Hot Coffees",R.drawable.hot_coffee));
-        items.add(new MenuItem("Cold Coffees",R.drawable.cold_coffee));
-        items.add(new MenuItem("Hot Drinks",R.drawable.hot_drinks));
-        items.add(new MenuItem("Cold Drinks",R.drawable.cold_drinks));
-        items.add(new MenuItem("Breakfast",R.drawable.breakfast));
-        items.add(new MenuItem("Sandwiches",R.drawable.sandwiches));
-        items.add(new MenuItem("Bakery",R.drawable.bakery));
-        items.add(new MenuItem("Snacks",R.drawable.snacks));
-        mMenuAdapter = new MenuListAdapter(items,this);
+        MenuVM menuVM = new ViewModelProvider(this).get(MenuVM.class);
+
+        mMenuAdapter = new MenuListAdapter(menuVM,this);
         mMenuList.setAdapter(mMenuAdapter);
         return view;
     }
@@ -96,16 +89,8 @@ public class MenuFragment extends Fragment implements OnListItemClickListener {
     //TODO open all categories
     @Override
     public void onListItemClick(int clickedItemIndex) {
-        if (clickedItemIndex == 0){
             Intent intent = new Intent(getActivity(), CategoryItemsActivity.class);
+            intent.putExtra("position",clickedItemIndex);
             startActivity(intent);
-        }
-
-//        Fragment fragment = new CategoryItemsFragment();
-//        FragmentManager fragmentManager= getFragmentManager();
-//        FragmentTransaction fragmentTransaction =fragmentManager.beginTransaction();
-//        fragmentTransaction.replace(R.id.fragmentContainerView,fragment,"tag");
-//        fragmentTransaction.addToBackStack(null);
-//        fragmentTransaction.commit();
     }
 }
