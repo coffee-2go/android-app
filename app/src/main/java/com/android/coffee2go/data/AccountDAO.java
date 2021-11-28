@@ -3,7 +3,6 @@ package com.android.coffee2go.data;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-
 import com.android.coffee2go.models.Account;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -26,7 +25,7 @@ public class AccountDAO {
                 .getInstance("https://coffee2go-baf44-default-rtdb.europe-west1.firebasedatabase.app");
         reference = database.getReference(Account.class.getSimpleName());
 
-        reference. addValueEventListener(new ValueEventListener() {
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot child : snapshot.getChildren()){
