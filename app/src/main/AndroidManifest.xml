@@ -11,11 +11,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Coffee2go">
         <activity
+            android:name=".view.activities.EditProfileActivity"
+            android:exported="false"
+            android:parentActivityName=".view.activities.MainActivity"/>
+        <activity
             android:name=".view.activities.MainActivity"
             android:exported="false" />
         <activity
             android:name=".view.activities.CategoryItemsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".view.activities.MenuActivity"/>
         <activity
             android:name=".view.activities.MenuActivity"
             android:exported="false" />

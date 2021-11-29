@@ -1,5 +1,6 @@
 package com.android.coffee2go.view.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,18 +8,15 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.android.coffee2go.R;
+import com.android.coffee2go.view.activities.EditProfileActivity;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ProfileFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import de.hdodenhof.circleimageview.CircleImageView;
 
-/**
- * @author Michal Pupák
- * **/
 public class ProfileFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
@@ -29,6 +27,11 @@ public class ProfileFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private ProgressBar progressBar;
+    private CircleImageView imageProfile;
+    private TextView textUsername;
+    private Button buttonEditProfile;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -65,6 +68,20 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
+
+        // config components
+        progressBar = view.findViewById(R.id.profile_progressBar);
+        imageProfile = view.findViewById(R.id.profile_imageView);
+        textUsername = view.findViewById(R.id.profile_textUsername);
+        buttonEditProfile = view.findViewById(R.id.profile_buttonEditProfile);
+
+        // open edit perfil
+        buttonEditProfile.setOnClickListener(view1 -> {
+            Intent intent = new Intent(getActivity(), EditProfileActivity.class);
+            startActivity(intent);
+        });
+
+        return view;
     }
 }

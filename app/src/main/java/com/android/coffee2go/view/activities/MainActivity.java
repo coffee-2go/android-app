@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         // config toolbar
         Toolbar toolbar = findViewById(R.id.toolbarMain);
-        toolbar.setTitle("Coffeee2go");
+        toolbar.setTitle("Coffee2go");
         setSupportActionBar(toolbar);
 
         // config object

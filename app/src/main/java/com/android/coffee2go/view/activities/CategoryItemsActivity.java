@@ -1,6 +1,7 @@
 package com.android.coffee2go.view.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,6 +26,12 @@ public class CategoryItemsActivity extends AppCompatActivity implements OnListIt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category_items);
+
+        // config toolbar
+        Toolbar toolbar = findViewById(R.id.toolbarMain);
+        toolbar.setTitle("Items");
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         categoryItems = findViewById(R.id.categoryItems);
         categoryItems.hasFixedSize();

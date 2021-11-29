@@ -16,4 +16,7 @@
     <string name="username">Username</string>
     <string name="logout">Logout</string>
     <string name="edit_profile">Edit Profile</string>
+    <string name="editProfile_username">Username:</string>
+    <string name="editProfile_change_picture">Change picture</string>
+    <string name="editProfile_save_changes">Save changes</string>
 </resources>
