@@ -58,7 +58,7 @@ public class RegisterActivity extends AppCompatActivity {
                 if (!email.isEmpty()) {
                     if (!password.isEmpty()) {
                         if (Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                            if (password.length() > 6) {
+                            if (password.length() >= 6) {
 
                                 Account account = new Account();
                                 account.setUsername(username);

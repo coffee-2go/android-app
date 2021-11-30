@@ -11,4 +11,6 @@ public interface CartVM {
     void removeOrder(int adapterPosition);
 
     LiveData<List<OrderLine>> getTransactionOrderLines();
+
+    double getTransactionTotal();
 }

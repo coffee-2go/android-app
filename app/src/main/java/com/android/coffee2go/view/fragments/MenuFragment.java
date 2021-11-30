@@ -2,15 +2,20 @@ package com.android.coffee2go.view.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import com.android.coffee2go.R;
-import com.android.coffee2go.models.MenuItem;
 import com.android.coffee2go.view.activities.CategoryItemsActivity;
 import com.android.coffee2go.view.adapters.MenuListAdapter;
 import com.android.coffee2go.viewmodels.MenuVM;
@@ -23,10 +28,7 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 
-/**
- * @author Michal Pupák
- * **/
-public class MenuFragment extends Fragment implements OnListItemClickListener {
+public class MenuFragment extends Fragment implements OnListItemClickListener, SearchView.OnQueryTextListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -86,11 +88,30 @@ public class MenuFragment extends Fragment implements OnListItemClickListener {
         return view;
     }
 
-    //TODO open all categories
     @Override
-    public void onListItemClick(int clickedItemIndex) {
+    public void onListItemClick(int listID, int clickedItemIndex) {
             Intent intent = new Intent(getActivity(), CategoryItemsActivity.class);
             intent.putExtra("position",clickedItemIndex);
             startActivity(intent);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_top,menu);
+
+        MenuItem searchItem = menu.findItem(R.id.actionSearch);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setOnQueryTextListener(this);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return false;
     }
 }

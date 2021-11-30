@@ -2,16 +2,12 @@ package com.android.coffee2go.models;
 
 import java.util.ArrayList;
 
-/**
- * @author Michal Pupák
- * **/
 public class Transaction {
     private ArrayList<OrderLine> orderLines;
     private int accountId;
 
     public Transaction() {
         orderLines = new ArrayList<>();
-
     }
 
     public void addOrderLine(OrderLine orderLine){

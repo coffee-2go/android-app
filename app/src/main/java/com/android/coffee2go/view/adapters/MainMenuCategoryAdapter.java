@@ -12,25 +12,24 @@ import com.android.coffee2go.viewmodels.MenuVM;
 import com.android.coffee2go.viewmodels.OnListItemClickListener;
 import java.util.ArrayList;
 
-
-
-public class MenuListAdapter extends RecyclerView.Adapter<MenuListAdapter.ViewHolder> {
+public class MainMenuCategoryAdapter extends RecyclerView.Adapter<MainMenuCategoryAdapter.ViewHolder>{
     private ArrayList<MenuItem> items;
-    final private OnListItemClickListener mOnListItemClickListener;
+    final private OnListItemClickListener OnListItemClickListener;
     private MenuVM menuVM;
 
-    public MenuListAdapter(MenuVM menuVM, OnListItemClickListener listener) {
+    public MainMenuCategoryAdapter(OnListItemClickListener onListItemClickListener, MenuVM menuVM) {
+        OnListItemClickListener = onListItemClickListener;
         this.menuVM = menuVM;
-        mOnListItemClickListener = listener;
 
         items = (ArrayList<MenuItem>) menuVM.getCategories();
     }
 
+
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MainMenuCategoryAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.list_item,parent,false);
+        View view = inflater.inflate(R.layout.viewholder_category_item,parent,false);
         return new ViewHolder(view);
     }
 
@@ -39,6 +38,7 @@ public class MenuListAdapter extends RecyclerView.Adapter<MenuListAdapter.ViewHo
         holder.itemName.setText(items.get(position).getName());
         holder.itemIcon.setBackgroundResource(items.get(position).getIconId());
     }
+
 
     @Override
     public int getItemCount() {
@@ -51,14 +51,14 @@ public class MenuListAdapter extends RecyclerView.Adapter<MenuListAdapter.ViewHo
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            itemIcon = itemView.findViewById(R.id.itemIcon);
-            itemName = itemView.findViewById(R.id.itemName);
+            itemIcon = itemView.findViewById(R.id.categoryItem_Icon);
+            itemName = itemView.findViewById(R.id.categoryItem_Name);
             itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            mOnListItemClickListener.onListItemClick(0,getAdapterPosition());
+            OnListItemClickListener.onListItemClick(0,getAdapterPosition());
         }
     }
 }

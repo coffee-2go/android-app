@@ -1,5 +1,10 @@
 package com.android.coffee2go.persistence;
 
+import android.view.Menu;
+
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+
 import com.android.coffee2go.R;
 import com.android.coffee2go.models.MenuItem;
 import java.util.ArrayList;
@@ -16,6 +21,9 @@ public class MenuItemsRepository {
     private final List<MenuItem> bakeryMenuItems;
     private final List<MenuItem> snacksMenuItems;
     private final List<MenuItem> categories;
+    private final List<MenuItem> allItems;
+
+    private MutableLiveData<List<MenuItem>> itemsToShow;
 
 
     private MenuItemsRepository(){
@@ -28,23 +36,50 @@ public class MenuItemsRepository {
         categories.add(new MenuItem("Sandwiches",R.drawable.sandwiches));
         categories.add(new MenuItem("Bakery",R.drawable.bakery));
         categories.add(new MenuItem("Snacks",R.drawable.snacks));
+        categories.add(new MenuItem("All Items",R.drawable.all_items));
 
         hotCoffeeMenuItems = new ArrayList<>();
-        hotCoffeeMenuItems.add(new MenuItem("Cappuccino",R.drawable.cappuccino));
-        hotCoffeeMenuItems.add(new MenuItem("Espresso",R.drawable.espresso));
-        hotCoffeeMenuItems.add(new MenuItem("Caffe Americano",R.drawable.caffe_americano));
-        hotCoffeeMenuItems.add(new MenuItem("Caffe Misto",R.drawable.caffe_misto));
-        hotCoffeeMenuItems.add(new MenuItem("Caramel Macchiato",R.drawable.caramel_macchiato));
-        hotCoffeeMenuItems.add(new MenuItem("Flat White",R.drawable.flat_white));
-        hotCoffeeMenuItems.add(new MenuItem("Cappuccino",R.drawable.caffe_mocha));
+        hotCoffeeMenuItems.add(new MenuItem("Cappuccino",R.drawable.cappuccino,35));
+        hotCoffeeMenuItems.add(new MenuItem("Espresso",R.drawable.espresso,25));
+        hotCoffeeMenuItems.add(new MenuItem("Caffe Americano",R.drawable.caffe_americano,40));
+        hotCoffeeMenuItems.add(new MenuItem("Caffe Misto",R.drawable.caffe_misto,30));
+        hotCoffeeMenuItems.add(new MenuItem("Caramel Macchiato",R.drawable.caramel_macchiato,45));
+        hotCoffeeMenuItems.add(new MenuItem("Flat White",R.drawable.flat_white,30));
+        hotCoffeeMenuItems.add(new MenuItem("Cappuccino",R.drawable.caffe_mocha,40));
 
         coldCoffeeMenuItems = new ArrayList<>();
+        coldCoffeeMenuItems.add(new MenuItem("Irish Cream Coffee",R.drawable.irish_cream_coffee,40));
+        coldCoffeeMenuItems.add(new MenuItem("Banana Milk Coffee",R.drawable.banana_milk_coffee,40));
+
         hotDrinksMenuItems = new ArrayList<>();
+        hotDrinksMenuItems.add(new MenuItem("Hot Chocolate",R.drawable.hot_chocolate,20));
+
         coldDrinkMenuItems = new ArrayList<>();
+        coldDrinkMenuItems.add(new MenuItem("Lemonade",R.drawable.limonade,15));
+
         breakfastMenuItems = new ArrayList<>();
+        breakfastMenuItems.add(new MenuItem("Ham & Eggs",R.drawable.ham_eggs,30));
+
         sandwichesMenuItems = new ArrayList<>();
+        sandwichesMenuItems.add(new MenuItem("Ham Sandwich",R.drawable.ham_sandwich,30));
+
         bakeryMenuItems = new ArrayList<>();
+        bakeryMenuItems.add(new MenuItem("Croissant",R.drawable.croissants,15));
+
         snacksMenuItems = new ArrayList<>();
+
+        allItems = new ArrayList<>();
+        allItems.addAll(hotCoffeeMenuItems);
+        allItems.addAll(coldCoffeeMenuItems);
+        allItems.addAll(hotDrinksMenuItems);
+        allItems.addAll(coldDrinkMenuItems);
+        allItems.addAll(breakfastMenuItems);
+        allItems.addAll(sandwichesMenuItems);
+        allItems.addAll(bakeryMenuItems);
+        allItems.addAll(snacksMenuItems);
+
+        itemsToShow = new MutableLiveData<>();
+        itemsToShow.setValue(allItems);
     }
 
     public static synchronized MenuItemsRepository getInstance(){
@@ -58,38 +93,76 @@ public class MenuItemsRepository {
         return categories;
     }
 
+    public LiveData<List<MenuItem>> getAllItems() {
+        ArrayList<MenuItem> menuItems = new ArrayList<>();
+        //itemsToShow = new MutableLiveData<>();
+
+        menuItems.addAll(hotCoffeeMenuItems);
+        menuItems.addAll(coldCoffeeMenuItems);
+        menuItems.addAll(hotDrinksMenuItems);
+        menuItems.addAll(coldDrinkMenuItems);
+        menuItems.addAll(breakfastMenuItems);
+        menuItems.addAll(sandwichesMenuItems);
+        menuItems.addAll(bakeryMenuItems);
+        menuItems.addAll(snacksMenuItems);
+
+        itemsToShow.setValue(menuItems);
+
+        return itemsToShow;
+    }
+
+    public LiveData<List<MenuItem>> getItemsToShow() {
+        return itemsToShow;
+    }
 
     public List<MenuItem> getCategoryItems(int position) {
         switch (position){
             case 0:
             {
+                itemsToShow.setValue(hotCoffeeMenuItems);
                 return hotCoffeeMenuItems;
             }
             case 1:
             {
+                itemsToShow.setValue(coldCoffeeMenuItems);
                 return coldCoffeeMenuItems;
             }
             case 2:
             {
+                itemsToShow.setValue(hotDrinksMenuItems);
                 return hotDrinksMenuItems;
             }case 3:
             {
+                itemsToShow.setValue(coldDrinkMenuItems);
                 return coldDrinkMenuItems;
             }case 4:
             {
+                itemsToShow.setValue(breakfastMenuItems);
                 return breakfastMenuItems;
             }case 5:
             {
+                itemsToShow.setValue(sandwichesMenuItems);
                 return sandwichesMenuItems;
             }case 6:
             {
+                itemsToShow.setValue(bakeryMenuItems);
                 return bakeryMenuItems;
             }case 7:
             {
+                itemsToShow.setValue(snacksMenuItems);
                 return snacksMenuItems;
+            }
+            case 8:
+            {
+                itemsToShow.setValue(allItems);
+                return allItems;
             }
             default:
                 throw new IllegalStateException("Unexpected value: " + position);
         }
+    }
+
+    public MenuItem getItem(int position) {
+        return itemsToShow.getValue().get(position);
     }
 }

@@ -16,4 +16,6 @@
     <string name="username">Username</string>
     <string name="logout">Logout</string>
     <string name="edit_profile">Edit Profile</string>
+    <string name="action_search">Search for menu item...</string>
+    <string name="search_item">Search item here...</string>
 </resources>

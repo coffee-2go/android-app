@@ -2,21 +2,30 @@ package com.android.coffee2go.viewmodels;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
-
 import com.android.coffee2go.models.OrderLine;
 import com.android.coffee2go.persistence.TransactionRepository;
 
 import java.util.List;
 
 public class CartVMImpl extends ViewModel implements CartVM {
+    private TransactionRepository repository;
+
+    public CartVMImpl() {
+        repository = TransactionRepository.getInstance();
+    }
 
     @Override
     public void removeOrder(int adapterPosition) {
-        TransactionRepository.getInstance().removeOrderLine(adapterPosition);
+        repository.removeOrderLine(adapterPosition);
     }
 
     @Override
     public LiveData<List<OrderLine>> getTransactionOrderLines() {
-        return TransactionRepository.getInstance().getTransactionOrderLines();
+        return repository.getTransactionOrderLines();
+    }
+
+    @Override
+    public double getTransactionTotal() {
+        return repository.getTransactionTotal();
     }
 }

@@ -13,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.android.coffee2go.MainMenu;
 import com.android.coffee2go.R;
 import com.android.coffee2go.helper.FirebaseConfig;
 import com.android.coffee2go.view.fragments.CartFragment;
@@ -45,7 +46,8 @@ public class MainActivity extends AppCompatActivity {
         // when first opening, open MenuFragment
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.viewPager, new MenuFragment()).commit();
+        //TODO change back to MenuFragment
+        fragmentTransaction.replace(R.id.viewPager, new MainMenu()).commit();
 
     }
 

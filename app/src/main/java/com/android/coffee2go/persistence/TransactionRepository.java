@@ -7,9 +7,6 @@ import com.android.coffee2go.models.Transaction;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author Michal Pupák
- * **/
 public class TransactionRepository {
     private static TransactionRepository instance;
     private Transaction currentTransaction;
@@ -46,5 +43,14 @@ public class TransactionRepository {
             orderLines.remove(adapterPosition);
         }
         transactionOrderLines.setValue(orderLines);
+    }
+
+    public double getTransactionTotal() {
+        double total = 0;
+        ArrayList<OrderLine> orderLines = (ArrayList<OrderLine>) transactionOrderLines.getValue();
+        for (OrderLine o:orderLines) {
+            total += o.getTotal();
+        }
+        return total;
     }
 }

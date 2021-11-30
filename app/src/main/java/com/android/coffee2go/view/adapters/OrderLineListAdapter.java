@@ -4,10 +4,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,14 +16,9 @@ import com.android.coffee2go.persistence.TransactionRepository;
 import com.android.coffee2go.viewmodels.CartVM;
 import com.android.coffee2go.viewmodels.CartVMImpl;
 import com.android.coffee2go.viewmodels.OnListItemClickListener;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
-/**
- * @author Michal Pupák
- * **/
 
 public class OrderLineListAdapter extends RecyclerView.Adapter<OrderLineListAdapter.ViewHolder>{
 
@@ -32,22 +26,23 @@ public class OrderLineListAdapter extends RecyclerView.Adapter<OrderLineListAdap
     final private OnListItemClickListener mOnListItemClickListener;
     private CartVM cartVM;
 
-
-    public OrderLineListAdapter(OnListItemClickListener listener){
+    public OrderLineListAdapter(CartVM cartVM,OnListItemClickListener listener){
         orderLines = new ArrayList<>();
-        TransactionRepository.getInstance().getTransactionOrderLines().observeForever(orders ->{
+        this.cartVM = cartVM;
+        mOnListItemClickListener = listener;
+
+        cartVM.getTransactionOrderLines().observeForever(orders ->{
             if (!orders.isEmpty()){
                 orderLines.addAll(orders);
             }
         });
-        mOnListItemClickListener = listener;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.orderline_item,parent,false);
+        View view = inflater.inflate(R.layout.cart_item,parent,false);
         return new OrderLineListAdapter.ViewHolder(view);
     }
 
@@ -56,7 +51,8 @@ public class OrderLineListAdapter extends RecyclerView.Adapter<OrderLineListAdap
         OrderLine orderLine = orderLines.get(position);
         holder.orderLineProductName.setText(orderLine.getProduct().getName());
         holder.orderLineQuantity.setText(orderLine.getQuantity() + "x");
-        holder.orderLineUnitPrice.setText(orderLine.getProduct().getUnitPrice() + " DKK");
+        holder.orderLineUnitPrice.setText(String.valueOf(orderLine.getProduct().getUnitPrice()));
+        holder.orderLineImage.setBackgroundResource(orderLine.getProduct().getIconId());
     }
 
     @Override
@@ -69,16 +65,18 @@ public class OrderLineListAdapter extends RecyclerView.Adapter<OrderLineListAdap
         TextView orderLineQuantity;
         TextView orderLineUnitPrice;
 
+        TextView orderLineImage;
+
         Button orderLineButtonRemove;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            cartVM = new ViewModelProvider((ViewModelStoreOwner) itemView.getContext()).get(CartVMImpl.class);
 
-            orderLineProductName = itemView.findViewById(R.id.orderLine_productName);
-            orderLineQuantity = itemView.findViewById(R.id.orderLine_Quantity);
-            orderLineUnitPrice = itemView.findViewById(R.id.orderLine_UnitPrice);
-            orderLineButtonRemove = itemView.findViewById(R.id.orderLine_Remove);
+            orderLineProductName = itemView.findViewById(R.id.cartItem_name);
+            orderLineQuantity = itemView.findViewById(R.id.cartItem_quantity);
+            orderLineUnitPrice = itemView.findViewById(R.id.cartItem_unitPrice);
+            orderLineButtonRemove = itemView.findViewById(R.id.cartItem_buttonRemove);
+            orderLineImage = itemView.findViewById(R.id.cartItem_icon);
 
             orderLineButtonRemove.setOnClickListener(c -> {
                 cartVM.removeOrder(getAdapterPosition());
@@ -87,7 +85,7 @@ public class OrderLineListAdapter extends RecyclerView.Adapter<OrderLineListAdap
 
         @Override
         public void onClick(View v) {
-            mOnListItemClickListener.onListItemClick(getAdapterPosition());
+            mOnListItemClickListener.onListItemClick(0,getAdapterPosition());
         }
     }
 }

@@ -2,43 +2,46 @@ package com.android.coffee2go.models;
 
 import java.util.ArrayList;
 
-/**
- * @author Michal Pupák
- * **/
 public class MenuItem{
-    private String mName;
-    private int mIconId;
-    private double mUnitPrice;
+    private String name;
+    private int iconId;
+    private double unitPrice;
     private ArrayList<Accessory> accessories;
 
-    public MenuItem(String mName, int mIconId) {
-        this.mName = mName;
-        this.mIconId = mIconId;
+    public MenuItem(String name, int iconId) {
+        this.name = name;
+        this.iconId = iconId;
         accessories = new ArrayList<>();
+    }
+
+    public MenuItem(String name, int iconId, double unitPrice) {
+        this.name = name;
+        this.iconId = iconId;
+        this.unitPrice = unitPrice;
     }
 
     public double getTotal(){
         double accessoryTotal = 0;
-        for (Accessory u: accessories) {
-            accessoryTotal += u.getUnitPrice();
-        }
-        return mUnitPrice + accessoryTotal;
+//        for (Accessory u: accessories) {
+//            accessoryTotal += u.getUnitPrice();
+//        }
+        return unitPrice + accessoryTotal;
     }
 
     public int getIconId() {
-        return mIconId;
+        return iconId;
     }
 
     public String getName() {
-        return mName;
+        return name;
     }
 
     public double getUnitPrice() {
-        return mUnitPrice;
+        return unitPrice;
     }
 
-    public void setUnitPrice(double mUnitPrice) {
-        this.mUnitPrice = mUnitPrice;
+    public void setUnitPrice(double unitPrice) {
+        this.unitPrice = unitPrice;
     }
 
     public ArrayList<Accessory> getAccessories() {

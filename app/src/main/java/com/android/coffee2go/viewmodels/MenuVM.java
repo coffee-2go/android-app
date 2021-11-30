@@ -19,4 +19,17 @@ public class MenuVM extends ViewModel {
     public List<MenuItem> getCategories(){
         return repository.getCategories();
     }
+
+    public LiveData<List<MenuItem>> getAllItems() {
+        return repository.getAllItems();
+    }
+
+
+    public List<MenuItem> getCategoryItems(int position) {
+        return repository.getCategoryItems(position);
+    }
+
+    public MenuItem getItem(int position) {
+        return repository.getItem(position);
+    }
 }

@@ -41,6 +41,6 @@ public class CategoryItemsActivity extends AppCompatActivity implements OnListIt
     }
 
     @Override
-    public void onListItemClick(int clickedItemIndex) {
+    public void onListItemClick(int id, int clickedItemIndex) {
     }
 }
