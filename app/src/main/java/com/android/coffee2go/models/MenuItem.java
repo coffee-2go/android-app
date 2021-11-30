@@ -6,12 +6,12 @@ public class MenuItem{
     private String name;
     private int iconId;
     private double unitPrice;
-    private ArrayList<Accessory> accessories;
+    //private ArrayList<Accessory> accessories;
 
     public MenuItem(String name, int iconId) {
         this.name = name;
         this.iconId = iconId;
-        accessories = new ArrayList<>();
+        //accessories = new ArrayList<>();
     }
 
     public MenuItem(String name, int iconId, double unitPrice) {
@@ -44,11 +44,11 @@ public class MenuItem{
         this.unitPrice = unitPrice;
     }
 
-    public ArrayList<Accessory> getAccessories() {
-        return accessories;
-    }
-
-    public void setAccessories(ArrayList<Accessory> accessories) {
-        this.accessories = accessories;
-    }
+//    public ArrayList<Accessory> getAccessories() {
+//        return accessories;
+//    }
+//
+//    public void setAccessories(ArrayList<Accessory> accessories) {
+//        this.accessories = accessories;
+//    }
 }

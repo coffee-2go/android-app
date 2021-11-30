@@ -4,17 +4,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.RecyclerView;
 import com.android.coffee2go.R;
 import com.android.coffee2go.models.OrderLine;
-import com.android.coffee2go.persistence.TransactionRepository;
 import com.android.coffee2go.viewmodels.CartVM;
-import com.android.coffee2go.viewmodels.CartVMImpl;
 import com.android.coffee2go.viewmodels.OnListItemClickListener;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +19,7 @@ public class OrderLineListAdapter extends RecyclerView.Adapter<OrderLineListAdap
 
     private final List<OrderLine> orderLines;
     final private OnListItemClickListener mOnListItemClickListener;
-    private CartVM cartVM;
+    private final CartVM cartVM;
 
     public OrderLineListAdapter(CartVM cartVM,OnListItemClickListener listener){
         orderLines = new ArrayList<>();
@@ -48,11 +43,13 @@ public class OrderLineListAdapter extends RecyclerView.Adapter<OrderLineListAdap
 
     @Override
     public void onBindViewHolder(@NonNull OrderLineListAdapter.ViewHolder holder, int position) {
-        OrderLine orderLine = orderLines.get(position);
-        holder.orderLineProductName.setText(orderLine.getProduct().getName());
-        holder.orderLineQuantity.setText(orderLine.getQuantity() + "x");
-        holder.orderLineUnitPrice.setText(String.valueOf(orderLine.getProduct().getUnitPrice()));
-        holder.orderLineImage.setBackgroundResource(orderLine.getProduct().getIconId());
+        OrderLine cartItem = orderLines.get(position);
+        holder.cartItemProductName.setText(cartItem.getProduct().getName());
+        holder.cartItemQuantity.setText(cartItem.getQuantity() + "x");
+        holder.cartItemUnitPrice.setText(cartItem.getProduct().getUnitPrice() +" DKK");
+        holder.cartItemImage.setBackgroundResource(cartItem.getProduct().getIconId());
+        holder.quantity = cartItem.getQuantity();
+        holder.cartItemTotal.setText(cartItem.getTotal()+" DKK");
     }
 
     @Override
@@ -61,25 +58,44 @@ public class OrderLineListAdapter extends RecyclerView.Adapter<OrderLineListAdap
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView orderLineProductName;
-        TextView orderLineQuantity;
-        TextView orderLineUnitPrice;
+        TextView cartItemProductName;
+        TextView cartItemQuantity;
+        TextView cartItemUnitPrice;
+        TextView cartItemTotal;
 
-        TextView orderLineImage;
+        TextView cartItemImage;
 
-        Button orderLineButtonRemove;
+        Button cartItemButtonDelete;
+        Button cartItemButtonAdd;
+        Button cartItemButtonRemove;
+        int quantity;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            orderLineProductName = itemView.findViewById(R.id.cartItem_name);
-            orderLineQuantity = itemView.findViewById(R.id.cartItem_quantity);
-            orderLineUnitPrice = itemView.findViewById(R.id.cartItem_unitPrice);
-            orderLineButtonRemove = itemView.findViewById(R.id.cartItem_buttonRemove);
-            orderLineImage = itemView.findViewById(R.id.cartItem_icon);
+            cartItemProductName = itemView.findViewById(R.id.cart_item_name);
+            cartItemQuantity = itemView.findViewById(R.id.cart_item_quantity);
+            cartItemUnitPrice = itemView.findViewById(R.id.cart_item_unitPrice);
+            cartItemButtonDelete = itemView.findViewById(R.id.cart_button_delete);
+            cartItemImage = itemView.findViewById(R.id.cart_item_icon);
+            cartItemTotal = itemView.findViewById(R.id.cart_item_total);
 
-            orderLineButtonRemove.setOnClickListener(c -> {
-                cartVM.removeOrder(getAdapterPosition());
+            cartItemButtonDelete.setOnClickListener(c -> cartVM.removeOrder(getAdapterPosition()));
+
+            cartItemButtonAdd = itemView.findViewById(R.id.cart_button_add);
+            cartItemButtonAdd.setOnClickListener(v -> {
+                orderLines.get(getAdapterPosition()).setQuantity(++quantity);
+                cartItemQuantity.setText(quantity +"x");
+                cartItemTotal.setText(orderLines.get(getAdapterPosition()).getTotal()+" DKK");
+            });
+
+            cartItemButtonRemove = itemView.findViewById(R.id.cart_button_remove);
+            cartItemButtonRemove.setOnClickListener(v -> {
+                if (quantity > 1){
+                    orderLines.get(getAdapterPosition()).setQuantity(--quantity);
+                    cartItemQuantity.setText(quantity +"x");
+                    cartItemTotal.setText(orderLines.get(getAdapterPosition()).getTotal()+" DKK");
+                }
             });
         }
 

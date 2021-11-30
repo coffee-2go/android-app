@@ -12,12 +12,9 @@ import com.android.coffee2go.viewmodels.CategoryItemsVM;
 import com.android.coffee2go.viewmodels.CategoryItemsVMImpl;
 import com.android.coffee2go.viewmodels.OnListItemClickListener;
 
-/**
- * @author Michal Pupák
- * **/
+
 //TODO Attach bottom navigation to the activity, make an option for a customer to go back
 //TODO Make a drop down with product details or create new activity with product's details
-//TODO Make the activity display the list of items corresponding to activity which was clicked
 public class CategoryItemsActivity extends AppCompatActivity implements OnListItemClickListener {
     RecyclerView categoryItems;
 

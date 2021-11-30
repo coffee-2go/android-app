@@ -11,7 +11,7 @@ public class OrderLine {
     public OrderLine(MenuItem product, int quantity) {
         this.product = product;
         this.quantity = quantity;
-        comment = "Extra fries please";
+        comment = "";
     }
 
     public double getTotal(){

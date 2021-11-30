@@ -4,16 +4,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.android.coffee2go.R;
 import com.android.coffee2go.models.MenuItem;
 import com.android.coffee2go.viewmodels.MenuVM;
 import com.android.coffee2go.viewmodels.OnListItemClickListener;
-
 import java.util.ArrayList;
 import java.util.List;
 

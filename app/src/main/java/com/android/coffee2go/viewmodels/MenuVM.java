@@ -2,9 +2,10 @@ package com.android.coffee2go.viewmodels;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
-
 import com.android.coffee2go.models.MenuItem;
+import com.android.coffee2go.models.OrderLine;
 import com.android.coffee2go.persistence.MenuItemsRepository;
+import com.android.coffee2go.persistence.TransactionRepository;
 
 import java.util.List;
 
@@ -31,5 +32,9 @@ public class MenuVM extends ViewModel {
 
     public MenuItem getItem(int position) {
         return repository.getItem(position);
+    }
+
+    public void addOrderLine(OrderLine orderLine) {
+        TransactionRepository.getInstance().addOrderLine(orderLine);
     }
 }
