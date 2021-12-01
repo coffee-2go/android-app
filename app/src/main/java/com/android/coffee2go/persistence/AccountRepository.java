@@ -5,9 +5,6 @@ package com.android.coffee2go.persistence;
 import com.android.coffee2go.data.AccountDAO;
 import com.android.coffee2go.models.Account;
 
-/**
- * @author Michal Pupák
- * **/
 public class AccountRepository {
 
     private static AccountRepository instance;

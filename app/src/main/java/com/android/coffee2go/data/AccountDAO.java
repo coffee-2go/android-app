@@ -11,6 +11,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
+import java.util.concurrent.atomic.AtomicReference;
 
 
 public class AccountDAO {
@@ -20,7 +21,7 @@ public class AccountDAO {
     private AccountDAO() {
         FirebaseDatabase database = FirebaseDatabase
                 .getInstance("https://coffee2go-baf44-default-rtdb.europe-west1.firebasedatabase.app");
-        reference = database.getReference(Account.class.getSimpleName());
+        reference = database.getReference("accounts");
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -65,4 +66,25 @@ public class AccountDAO {
         });
         return null;
     }
+
+//    public Account getAccount(String id){
+//        final Account[] accounts = {new Account()};
+//        reference.child(id).get().addOnCompleteListener(task -> {
+//            if (!task.isSuccessful()) {
+//                Log.e("firebase", "Error getting data", task.getException());
+//            }
+//            else {
+//                HashMap<String, String> value = (HashMap<String, String>) task.getResult().getValue();
+//                Log.i("ACCOUNT DAO GET ACCOUNT",value.toString());
+//                Account account = new Account();
+//                account.setId(value.get("id"));
+//                account.setUsername(value.get("username"));
+//                account.setUrlPicture(value.get("urlPicture"));
+//                account.setEmail(value.get("email"));
+//                Log.i("ACCOUNT DAO GET ACCOUNT",account.toString());
+//                //account[0] = new Account(map.get("username"), map.get("email"), map.get("password"));
+//            }
+//        });
+//        return accounts[0];
+//    }
 }
