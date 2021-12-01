@@ -19,4 +19,6 @@
     <string name="editProfile_username">Username:</string>
     <string name="editProfile_change_picture">Change picture</string>
     <string name="editProfile_save_changes">Save changes</string>
+    <string name="editProfile_usernameHint">Username</string>
+    <string name="editProfile_email">Email</string>
 </resources>

@@ -1,8 +1,6 @@
 package com.android.coffee2go.view.activities;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,13 +12,9 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.coffee2go.R;
-import com.android.coffee2go.helper.FirebaseConfig;
+import com.android.coffee2go.helper.AccountFirebase;
+import com.android.coffee2go.helper.ConfigFirebase;
 import com.android.coffee2go.models.Account;
-import com.android.coffee2go.viewmodels.RegisterVM;
-import com.android.coffee2go.viewmodels.RegisterVMImpl;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
@@ -35,8 +29,7 @@ public class RegisterActivity extends AppCompatActivity {
     private Button buttonRegister;
     private ProgressBar progressBar;
 
-    private FirebaseAuth auth;
-    private DatabaseReference db;
+    private FirebaseAuth mAuth;
     //private RegisterVM registerVM;
 
     @Override
@@ -94,8 +87,8 @@ public class RegisterActivity extends AppCompatActivity {
     private void register(Account account) {
 
         progressBar.setVisibility(View.VISIBLE);
-        auth = FirebaseConfig.getFirebaseAuth();
-        auth.createUserWithEmailAndPassword(
+        mAuth = ConfigFirebase.getFirebaseAuth();
+        mAuth.createUserWithEmailAndPassword(
                 account.getEmail(),
                 account.getPassword()
         ).addOnCompleteListener(
@@ -103,13 +96,28 @@ public class RegisterActivity extends AppCompatActivity {
                 task -> {
 
                     if ( task.isSuccessful() ) {
-                        progressBar.setVisibility(View.GONE);
-                        Toast.makeText(RegisterActivity.this,
-                                "Account created successfully!",
-                                Toast.LENGTH_SHORT).show();
 
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        finish();
+                        try {
+                            progressBar.setVisibility(View.GONE);
+
+                            // Save account in the realtime-database-firebase
+                            String idAccount = task.getResult().getUser().getUid();
+                            account.setId(idAccount);
+                            account.save();
+
+                            // Save username in Auth-firebase
+                            AccountFirebase.updateUsername(account.getUsername());
+
+                            Toast.makeText(RegisterActivity.this,
+                                    "Account created successfully!",
+                                    Toast.LENGTH_SHORT).show();
+
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            finish();
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
 
                     } else {
                         progressBar.setVisibility(View.GONE);
