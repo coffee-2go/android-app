@@ -82,27 +82,17 @@ public class OrderLineListAdapter extends RecyclerView.Adapter<OrderLineListAdap
 
             cartItemButtonAdd = itemView.findViewById(R.id.cart_button_add);
             cartItemButtonAdd.setOnClickListener(v -> {
-                orderLines.get(getAdapterPosition()).setQuantity(++quantity);
+                quantity++;
+                cartVM.changeQuantity(getAdapterPosition(),quantity);
                 cartItemQuantity.setText(quantity +"x");
-                cartItemTotal.setText(orderLines.get(getAdapterPosition()).getTotal()+" DKK");
-                double total = 0;
-                for ( OrderLine o : orderLines){
-                    total += o.getTotal();
-                }
-                cartTotal.setText(total+" DKK");
             });
 
             cartItemButtonRemove = itemView.findViewById(R.id.cart_button_remove);
             cartItemButtonRemove.setOnClickListener(v -> {
                 if (quantity > 1){
-                    orderLines.get(getAdapterPosition()).setQuantity(--quantity);
+                    --quantity;
+                    cartVM.changeQuantity(getAdapterPosition(),quantity);
                     cartItemQuantity.setText(quantity +"x");
-                    cartItemTotal.setText(orderLines.get(getAdapterPosition()).getTotal()+" DKK");
-                    double total = 0;
-                    for ( OrderLine o : orderLines){
-                        total += o.getTotal();
-                    }
-                    cartTotal.setText(total+" DKK");
                 }
             });
         }

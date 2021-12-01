@@ -11,4 +11,6 @@ public interface CartVM {
     LiveData<List<OrderLine>> getTransactionOrderLines();
 
     LiveData<Double> getTransactionTotal();
+
+    void changeQuantity(int position, int newQuantity);
 }

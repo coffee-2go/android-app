@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 import com.android.coffee2go.models.OrderLine;
 import com.android.coffee2go.persistence.TransactionRepository;
-
 import java.util.List;
 
 public class CartVMImpl extends ViewModel implements CartVM {
@@ -27,5 +26,10 @@ public class CartVMImpl extends ViewModel implements CartVM {
     @Override
     public LiveData<Double> getTransactionTotal() {
         return repository.getTransactionTotal();
+    }
+
+    @Override
+    public void changeQuantity(int position, int newQuantity) {
+        repository.changeQuantity(position,newQuantity);
     }
 }

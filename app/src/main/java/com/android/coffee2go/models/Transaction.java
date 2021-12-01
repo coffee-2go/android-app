@@ -25,4 +25,12 @@ public class Transaction {
     public int getAccountId() {
         return accountId;
     }
+
+    public double getTransactionTotal(){
+        double total = 0;
+        for (OrderLine o: orderLines) {
+            total += o.getTotal();
+        }
+        return total;
+    }
 }

@@ -36,9 +36,7 @@ public class TransactionRepository {
 
         currentTransaction.addOrderLine(orderLine);
 
-        Double value = transactionTotal.getValue();
-        value = value + orderLine.getTotal();
-        transactionTotal.setValue(value);
+        transactionTotal.setValue(currentTransaction.getTransactionTotal());
 
         System.out.println("TRANSACTION REPOSITORY: ORDER LINE ADDED");
     }
@@ -53,15 +51,17 @@ public class TransactionRepository {
     public void removeOrderLine(int adapterPosition) {
         List<OrderLine> orderLines = transactionOrderLines.getValue();
         if (orderLines != null) {
-            OrderLine orderLine = orderLines.get(adapterPosition);
             orderLines.remove(adapterPosition);
-
-            Double value = transactionTotal.getValue();
-            value = value - orderLine.getTotal();
-            transactionTotal.setValue(value);
         }
         transactionOrderLines.setValue(orderLines);
         currentTransaction.setOrderLines((ArrayList<OrderLine>) orderLines);
+        transactionTotal.setValue(currentTransaction.getTransactionTotal());
+    }
+
+    public void changeQuantity(int position, int newQuantity){
+        currentTransaction.getOrderLines().get(position).setQuantity(newQuantity);
+        transactionOrderLines.setValue(currentTransaction.getOrderLines());
+        transactionTotal.setValue(currentTransaction.getTransactionTotal());
     }
 
     public LiveData<Double> getTransactionTotal() {
