@@ -10,13 +10,19 @@ import java.util.List;
 public class TransactionRepository {
     private static TransactionRepository instance;
     private Transaction currentTransaction;
+    private MutableLiveData<Double> transactionTotal;
     private MutableLiveData<List<OrderLine>> transactionOrderLines;
 
     private TransactionRepository(){
         currentTransaction = new Transaction();
+
         transactionOrderLines = new MutableLiveData<>();
         List<OrderLine> orderLines = new ArrayList<>();
         transactionOrderLines.setValue(orderLines);
+
+        transactionTotal = new MutableLiveData<>();
+        Double total = 0.0;
+        transactionTotal.setValue(total);
     }
 
     public LiveData<List<OrderLine>> getTransactionOrderLines() {
@@ -27,7 +33,14 @@ public class TransactionRepository {
         List<OrderLine> orderLines = transactionOrderLines.getValue();
         orderLines.add(orderLine);
         transactionOrderLines.setValue(orderLines);
-        System.out.println("TRANSACTION REPOSITORY: ORDER LINE ADDED");;
+
+        currentTransaction.addOrderLine(orderLine);
+
+        Double value = transactionTotal.getValue();
+        value = value + orderLine.getTotal();
+        transactionTotal.setValue(value);
+
+        System.out.println("TRANSACTION REPOSITORY: ORDER LINE ADDED");
     }
 
     public static synchronized TransactionRepository getInstance(){
@@ -40,17 +53,18 @@ public class TransactionRepository {
     public void removeOrderLine(int adapterPosition) {
         List<OrderLine> orderLines = transactionOrderLines.getValue();
         if (orderLines != null) {
+            OrderLine orderLine = orderLines.get(adapterPosition);
             orderLines.remove(adapterPosition);
+
+            Double value = transactionTotal.getValue();
+            value = value - orderLine.getTotal();
+            transactionTotal.setValue(value);
         }
         transactionOrderLines.setValue(orderLines);
+        currentTransaction.setOrderLines((ArrayList<OrderLine>) orderLines);
     }
 
-    public double getTransactionTotal() {
-        double total = 0;
-        ArrayList<OrderLine> orderLines = (ArrayList<OrderLine>) transactionOrderLines.getValue();
-        for (OrderLine o:orderLines) {
-            total += o.getTotal();
-        }
-        return total;
+    public LiveData<Double> getTransactionTotal() {
+        return transactionTotal;
     }
 }

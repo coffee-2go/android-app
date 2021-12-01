@@ -11,9 +11,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 
-import com.android.coffee2go.MainMenu;
+import com.android.coffee2go.view.fragments.MainMenu;
 import com.android.coffee2go.R;
 import com.android.coffee2go.helper.FirebaseConfig;
 import com.android.coffee2go.view.fragments.CartFragment;
@@ -21,7 +20,6 @@ import com.android.coffee2go.view.fragments.LocationFragment;
 import com.android.coffee2go.view.fragments.MenuFragment;
 import com.android.coffee2go.view.fragments.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {

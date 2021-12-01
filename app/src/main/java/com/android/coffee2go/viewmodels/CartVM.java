@@ -1,9 +1,7 @@
 package com.android.coffee2go.viewmodels;
 
 import androidx.lifecycle.LiveData;
-
 import com.android.coffee2go.models.OrderLine;
-
 import java.util.List;
 
 public interface CartVM {
@@ -12,5 +10,5 @@ public interface CartVM {
 
     LiveData<List<OrderLine>> getTransactionOrderLines();
 
-    double getTransactionTotal();
+    LiveData<Double> getTransactionTotal();
 }

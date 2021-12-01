@@ -25,7 +25,7 @@ public class CartVMImpl extends ViewModel implements CartVM {
     }
 
     @Override
-    public double getTransactionTotal() {
+    public LiveData<Double> getTransactionTotal() {
         return repository.getTransactionTotal();
     }
 }

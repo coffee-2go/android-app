@@ -21,7 +21,6 @@ import com.android.coffee2go.view.adapters.OrderLineListAdapter;
  * create an instance of this fragment.
  */
 
-
 public class CartFragment extends Fragment implements OnListItemClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
@@ -79,8 +78,20 @@ public class CartFragment extends Fragment implements OnListItemClickListener {
         OrderLineListAdapter orderLineListAdapter = new OrderLineListAdapter(cartVM,this);
         orderLinesList.setAdapter(orderLineListAdapter);
 
-        TextView textView = view.findViewById(R.id.cartFragment_Total);
-        textView.setText(cartVM.getTransactionTotal() + " DKK");
+        TextView total = view.findViewById(R.id.cartFragment_Total);
+        total.setText(cartVM.getTransactionTotal() + " DKK");
+        orderLineListAdapter.setCartTotalView(total);
+
+        cartVM.getTransactionTotal().observe(getViewLifecycleOwner(), number ->{
+            total.setText(number.doubleValue()+" DKK");
+        });
+
+        cartVM.getTransactionOrderLines().observe(getViewLifecycleOwner(), items ->{
+            orderLinesList.getRecycledViewPool().clear();
+            orderLineListAdapter.notifyDataSetChanged();
+            orderLineListAdapter.setItemsToShow(items);
+        });
+
         return view;
     }
 

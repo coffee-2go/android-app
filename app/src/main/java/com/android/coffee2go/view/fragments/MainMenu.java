@@ -1,10 +1,9 @@
-package com.android.coffee2go;
+package com.android.coffee2go.view.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,11 +12,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.coffee2go.R;
 import com.android.coffee2go.models.MenuItem;
-import com.android.coffee2go.view.activities.CategoryItemsActivity;
+import com.android.coffee2go.view.activities.MenuItemActivity;
 import com.android.coffee2go.view.adapters.MainMenuCategoryAdapter;
 import com.android.coffee2go.view.adapters.MainMenuItemsAdapter;
-import com.android.coffee2go.view.adapters.MenuListAdapter;
 import com.android.coffee2go.viewmodels.MenuVM;
 import com.android.coffee2go.viewmodels.OnListItemClickListener;
 

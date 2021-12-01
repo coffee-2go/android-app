@@ -1,9 +1,11 @@
-package com.android.coffee2go;
+package com.android.coffee2go.view.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.android.coffee2go.R;
 import com.android.coffee2go.models.MenuItem;
 import com.android.coffee2go.models.OrderLine;
 import com.android.coffee2go.viewmodels.MenuVM;
