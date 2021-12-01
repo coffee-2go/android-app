@@ -20,6 +20,9 @@
             android:name=".view.activities.MainActivity"
             android:exported="false" />
         <activity
+            android:name=".view.activities.MenuItemActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.activities.CategoryItemsActivity"
             android:exported="false"
             android:parentActivityName=".view.activities.MainActivity"/>

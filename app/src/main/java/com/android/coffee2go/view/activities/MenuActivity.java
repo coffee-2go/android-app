@@ -20,7 +20,7 @@ public class MenuActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration
-                .Builder(R.id.menuFragment,R.id.cartFragment,R.id.locationFragment,R.id.profileFragment).build();
+                .Builder(R.id.fragment_main_menu,R.id.cartFragment,R.id.locationFragment,R.id.profileFragment).build();
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView);
 

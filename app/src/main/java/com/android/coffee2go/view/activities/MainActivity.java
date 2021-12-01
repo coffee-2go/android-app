@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         // bottomNavigationView.setLabelVisibilityMode(NavigationBarView.LABEL_VISIBILITY_UNLABELED);
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration
-                .Builder(R.id.menuFragment,R.id.cartFragment,R.id.locationFragment,R.id.profileFragment).build();
+                .Builder(R.id.fragment_main_menu,R.id.cartFragment,R.id.locationFragment,R.id.profileFragment).build();
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.mainActivity_fragmentContainerView_NavHostFragment);
 
