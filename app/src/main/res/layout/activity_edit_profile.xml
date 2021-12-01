@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,37 +14,52 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="15dp">
+        android:padding="16dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile_imageView"
-            android:layout_width="96dp"
-            android:layout_height="96dp"
-            android:src="@drawable/avatar" />
+            android:id="@+id/editProfile_imageEditProfile"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:src="@drawable/avatar"
+            tools:ignore="ImageContrastCheck" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/editProfile_textChangePicture"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clickable="true"
             android:text="@string/editProfile_change_picture"
             android:textAlignment="center"
             android:textColor="@color/cream"
-            android:textStyle="bold" />
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:focusable="true" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName"
+            android:id="@+id/editProfile_editUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
             android:drawableStart="@drawable/ic_baseline_person_24"
             android:ems="10"
-            android:hint="Username"
+            android:hint="@string/editProfile_usernameHint"
             android:inputType="textPersonName"
             android:minHeight="48dp" />
 
+        <TextView
+            android:id="@+id/editProfile_TextEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:ems="10"
+            android:minHeight="48dp"
+            android:paddingTop="20dp"
+            android:textSize="18sp"
+            app:drawableLeftCompat="@drawable/ic_baseline_email_24" />
+
         <Button
-            android:id="@+id/button"
+            android:id="@+id/editProfile_buttonSaveChanges"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0"
