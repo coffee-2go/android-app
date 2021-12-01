@@ -1,44 +1,33 @@
 package com.android.coffee2go.view.activities;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityOptionsCompat;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.coffee2go.R;
 import com.android.coffee2go.helper.AccountFirebase;
 import com.android.coffee2go.helper.ConfigFirebase;
+import com.android.coffee2go.helper.Permission;
 import com.android.coffee2go.models.Account;
 import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-
 import java.io.ByteArrayOutputStream;
-import java.util.HashMap;
-import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -53,10 +42,17 @@ public class EditProfileActivity extends AppCompatActivity {
     private StorageReference storageRef;
     private String idAccount;
 
+    private String[] necessaryPermissions = new String[] {
+            Manifest.permission.READ_EXTERNAL_STORAGE
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
+
+        // validate permissions
+        Permission.validatePermissions(necessaryPermissions, this, 1);
 
         // initial config
         loggedAccount = AccountFirebase.getDataLoggedAccount();
@@ -68,10 +64,8 @@ public class EditProfileActivity extends AppCompatActivity {
         toolbar.setTitle("Edit Profile");
         setSupportActionBar(toolbar);
 
-        assert getSupportActionBar() != null;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_close_24);
-
 
         // init components
         initComponents();
@@ -110,7 +104,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 new ActivityResultContracts.StartActivityForResult(), result -> {
                     if (result.getResultCode() == Activity.RESULT_OK) {
 
-                        Bitmap image;
+                        Bitmap image = null;
 
                         Intent data = result.getData();
                         try {
@@ -130,22 +124,29 @@ public class EditProfileActivity extends AppCompatActivity {
                                 image.compress(Bitmap.CompressFormat.JPEG, 70, boas);
                                 byte[] imageDataInBytes = boas.toByteArray();
 
-                                // save image in Storage
+                                // save image in firebase
                                 StorageReference imageRef = storageRef
                                         .child("images")
                                         .child("profile")
                                         .child(idAccount + ".jpeg");
-
-                                // persist an array of bytes of the image  into the Storage using putBytes
+                                // pass an array of bytes of the image
                                 UploadTask uploadTask = imageRef.putBytes(imageDataInBytes);
-                                uploadTask
-                                        .addOnFailureListener(e -> Toast.makeText(EditProfileActivity.this,
-                                                "Error when trying to upload image!",
-                                                Toast.LENGTH_SHORT).show())
-                                        .addOnSuccessListener(taskSnapshot -> {
-                                            // retrieve image uri
-                                            Task<Uri> taskUrl = taskSnapshot.getMetadata().getReference().getDownloadUrl();
-                                            taskUrl.addOnSuccessListener(this::updatePictureAccount);
+                                uploadTask.addOnFailureListener(e -> {
+                                    Toast.makeText(EditProfileActivity.this,
+                                            "Error when trying to upload image!",
+                                            Toast.LENGTH_SHORT).show();
+                                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                    @Override
+                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                        // retrieve image uri
+                                        Task<Uri> taskUrl = taskSnapshot.getMetadata().getReference().getDownloadUrl();
+                                        taskUrl.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                            @Override
+                                            public void onSuccess(Uri uri) {
+                                                updatePictureAccount(uri);
+                                            }
+                                        });
+                                    }
                                 });
                             }
                         } catch (Exception e) {

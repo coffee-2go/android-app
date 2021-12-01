@@ -28,12 +28,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
+            android:focusable="true"
+            android:minHeight="48dp"
             android:text="@string/editProfile_change_picture"
             android:textAlignment="center"
             android:textColor="@color/cream"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:focusable="true" />
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/editProfile_editUsername"

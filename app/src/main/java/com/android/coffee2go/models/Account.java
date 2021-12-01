@@ -102,9 +102,11 @@ public class Account {
     @Override
     public String toString() {
         return "Account{" +
-                "username='" + username + '\'' +
+                "id='" + id + '\'' +
+                ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", urlPicture='" + urlPicture + '\'' +
                 '}';
     }
 }
