@@ -1,6 +1,5 @@
 package com.android.coffee2go.view.activities;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import android.content.Intent;
@@ -11,12 +10,9 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 import com.android.coffee2go.R;
-import com.android.coffee2go.helper.FirebaseConfig;
+import com.android.coffee2go.helper.ConfigFirebase;
 import com.android.coffee2go.models.Account;
 import com.android.coffee2go.viewmodels.LoginActivityVM;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
@@ -75,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void validateLogin(Account account) {
         progressBar.setVisibility(View.VISIBLE);
-        auth = FirebaseConfig.getFirebaseAuth();
+        auth = ConfigFirebase.getFirebaseAuth();
         auth.signInWithEmailAndPassword(
                 account.getEmail(),
                 account.getPassword()
@@ -94,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void verifyLoggedAccount() {
-        auth = FirebaseConfig.getFirebaseAuth();
+        auth = ConfigFirebase.getFirebaseAuth();
         if (auth.getCurrentUser() != null) {
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
             finish();
