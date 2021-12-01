@@ -1,14 +1,17 @@
 package com.android.coffee2go.view.fragments;
 
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import com.android.coffee2go.R;
+import com.android.coffee2go.viewmodels.CartVM;
+import com.android.coffee2go.viewmodels.CartVMImpl;
 import com.android.coffee2go.viewmodels.OnListItemClickListener;
 import com.android.coffee2go.view.adapters.OrderLineListAdapter;
 
@@ -18,9 +21,6 @@ import com.android.coffee2go.view.adapters.OrderLineListAdapter;
  * create an instance of this fragment.
  */
 
-/**
- * @author Michal Pupák
- * **/
 public class CartFragment extends Fragment implements OnListItemClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
@@ -74,13 +74,29 @@ public class CartFragment extends Fragment implements OnListItemClickListener {
         orderLinesList.hasFixedSize();
         orderLinesList.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
-        OrderLineListAdapter orderLineListAdapter = new OrderLineListAdapter(this);
+        CartVM cartVM = new ViewModelProvider(this).get(CartVMImpl.class);
+        OrderLineListAdapter orderLineListAdapter = new OrderLineListAdapter(cartVM,this);
         orderLinesList.setAdapter(orderLineListAdapter);
+
+        TextView total = view.findViewById(R.id.cartFragment_Total);
+        total.setText(cartVM.getTransactionTotal() + " DKK");
+        orderLineListAdapter.setCartTotalView(total);
+
+        cartVM.getTransactionTotal().observe(getViewLifecycleOwner(), number ->{
+            total.setText(number.doubleValue()+" DKK");
+        });
+
+        cartVM.getTransactionOrderLines().observe(getViewLifecycleOwner(), items ->{
+            orderLinesList.getRecycledViewPool().clear();
+            orderLineListAdapter.notifyDataSetChanged();
+            orderLineListAdapter.setItemsToShow(items);
+        });
+
         return view;
     }
 
     @Override
-    public void onListItemClick(int clickedItemIndex) {
+    public void onListItemClick(int id, int clickedItemIndex) {
 
     }
 }

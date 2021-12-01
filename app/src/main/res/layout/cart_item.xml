@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#DBBB51"
+    android:layout_margin="4dp">
+
+    <TextView
+        android:id="@+id/cart_item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="-16dp"
+        android:autoSizeTextType="uniform"
+        android:text="Espresso"
+        android:textColor="@color/textWhite"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/cart_item_icon"
+        app:layout_constraintTop_toTopOf="@+id/cart_item_icon"
+        tools:targetApi="o" />
+
+    <TextView
+        android:id="@+id/cart_item_icon"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/espresso"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/espresso" />
+
+    <Button
+        android:id="@+id/cart_button_delete"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="#E2FF5722"
+        android:padding="3dp"
+        android:paddingLeft="3dp"
+        android:paddingTop="3dp"
+        android:paddingRight="3dp"
+        android:paddingBottom="3dp"
+        android:text="X"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/cart_button_remove"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/button"
+        android:text="-"
+        android:textColor="#212121"
+        app:layout_constraintStart_toStartOf="@+id/cart_item_name"
+        app:layout_constraintTop_toBottomOf="@+id/cart_item_name" />
+
+    <TextView
+        android:id="@+id/cart_item_quantity"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="0"
+        android:textColor="@color/textWhite"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/cart_button_remove"
+        app:layout_constraintTop_toBottomOf="@+id/cart_item_name" />
+
+    <Button
+        android:id="@+id/cart_button_add"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/button"
+        android:text="+"
+
+        android:textColor="#212121"
+        app:layout_constraintStart_toEndOf="@+id/cart_item_quantity"
+        app:layout_constraintTop_toBottomOf="@+id/cart_item_name" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="Total"
+        android:textColor="@color/textWhite"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/cart_button_remove"
+        app:layout_constraintTop_toBottomOf="@+id/cart_button_remove" />
+
+    <TextView
+        android:id="@+id/cart_item_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:gravity="center"
+        android:text="60 DKK"
+        android:textColor="@color/textWhite"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView9" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

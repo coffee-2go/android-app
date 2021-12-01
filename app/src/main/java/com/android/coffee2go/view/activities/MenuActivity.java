@@ -9,9 +9,6 @@ import android.os.Bundle;
 import com.android.coffee2go.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-/**
- * @author Michal Pupák
- * **/
 
 public class MenuActivity extends AppCompatActivity {
 

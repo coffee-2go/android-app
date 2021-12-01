@@ -13,9 +13,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 
 
-/**
- * @author Michal Pupák
- * **/
 public class AccountDAO {
     private DatabaseReference reference;
     private static AccountDAO instance;
