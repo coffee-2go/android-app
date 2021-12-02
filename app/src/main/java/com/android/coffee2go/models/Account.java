@@ -3,7 +3,6 @@ package com.android.coffee2go.models;
 import com.android.coffee2go.helper.ConfigFirebase;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;
-
 import java.util.HashMap;
 import java.util.Map;
 

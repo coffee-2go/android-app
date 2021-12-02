@@ -1,4 +1,4 @@
-package com.android.coffee2go.persistence;
+package com.android.coffee2go.repository;
 
 //import com.google.firebase.auth.FirebaseUser;
 

@@ -1,9 +1,10 @@
-package com.android.coffee2go.persistence;
+package com.android.coffee2go.repository;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.android.coffee2go.R;
+import com.android.coffee2go.data.MenuItemsDAO;
 import com.android.coffee2go.models.MenuItem;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,6 @@ public class MenuItemsRepository {
     private final List<MenuItem> breakfastMenuItems;
     private final List<MenuItem> sandwichesMenuItems;
     private final List<MenuItem> bakeryMenuItems;
-    private final List<MenuItem> snacksMenuItems;
     private final List<MenuItem> categories;
     private final List<MenuItem> allItems;
 
@@ -25,6 +25,14 @@ public class MenuItemsRepository {
 
 
     private MenuItemsRepository(){
+//        bakeryMenuItems = MenuItemsDAO.getInstance().GetMenuItems("Bakery");
+//        breakfastMenuItems = MenuItemsDAO.getInstance().GetMenuItems("Breakfast");
+//        coldCoffeeMenuItems = MenuItemsDAO.getInstance().GetMenuItems("Cold Coffee");
+//        coldDrinkMenuItems = MenuItemsDAO.getInstance().GetMenuItems("Cold Drinks");
+//        hotCoffeeMenuItems = MenuItemsDAO.getInstance().GetMenuItems("Hot Coffee");
+//        hotDrinksMenuItems = MenuItemsDAO.getInstance().GetMenuItems("Hot Drinks");
+//        sandwichesMenuItems = MenuItemsDAO.getInstance().GetMenuItems("Sandwiches");
+
         categories = new ArrayList<>();
         categories.add(new MenuItem("Hot Coffees", R.drawable.hot_coffee));
         categories.add(new MenuItem("Cold Coffees",R.drawable.cold_coffee));
@@ -33,7 +41,6 @@ public class MenuItemsRepository {
         categories.add(new MenuItem("Breakfast",R.drawable.breakfast));
         categories.add(new MenuItem("Sandwiches",R.drawable.sandwiches));
         categories.add(new MenuItem("Bakery",R.drawable.bakery));
-        categories.add(new MenuItem("Snacks",R.drawable.snacks));
         categories.add(new MenuItem("All Items",R.drawable.all_items));
 
         hotCoffeeMenuItems = new ArrayList<>();
@@ -43,7 +50,7 @@ public class MenuItemsRepository {
         hotCoffeeMenuItems.add(new MenuItem("Caffe Misto",R.drawable.caffe_misto,30));
         hotCoffeeMenuItems.add(new MenuItem("Caramel Macchiato",R.drawable.caramel_macchiato,45));
         hotCoffeeMenuItems.add(new MenuItem("Flat White",R.drawable.flat_white,30));
-        hotCoffeeMenuItems.add(new MenuItem("Cappuccino",R.drawable.caffe_mocha,40));
+        hotCoffeeMenuItems.add(new MenuItem("Caffe Mocha",R.drawable.caffe_mocha,40));
 
         coldCoffeeMenuItems = new ArrayList<>();
         coldCoffeeMenuItems.add(new MenuItem("Irish Cream Coffee",R.drawable.irish_cream_coffee,40));
@@ -64,8 +71,6 @@ public class MenuItemsRepository {
         bakeryMenuItems = new ArrayList<>();
         bakeryMenuItems.add(new MenuItem("Croissant",R.drawable.croissants,15));
 
-        snacksMenuItems = new ArrayList<>();
-
         allItems = new ArrayList<>();
         allItems.addAll(hotCoffeeMenuItems);
         allItems.addAll(coldCoffeeMenuItems);
@@ -74,8 +79,6 @@ public class MenuItemsRepository {
         allItems.addAll(breakfastMenuItems);
         allItems.addAll(sandwichesMenuItems);
         allItems.addAll(bakeryMenuItems);
-        allItems.addAll(snacksMenuItems);
-
         itemsToShow = new MutableLiveData<>();
         itemsToShow.setValue(allItems);
     }
@@ -93,7 +96,6 @@ public class MenuItemsRepository {
 
     public LiveData<List<MenuItem>> getAllItems() {
         ArrayList<MenuItem> menuItems = new ArrayList<>();
-        //itemsToShow = new MutableLiveData<>();
 
         menuItems.addAll(hotCoffeeMenuItems);
         menuItems.addAll(coldCoffeeMenuItems);
@@ -102,14 +104,9 @@ public class MenuItemsRepository {
         menuItems.addAll(breakfastMenuItems);
         menuItems.addAll(sandwichesMenuItems);
         menuItems.addAll(bakeryMenuItems);
-        menuItems.addAll(snacksMenuItems);
 
         itemsToShow.setValue(menuItems);
 
-        return itemsToShow;
-    }
-
-    public LiveData<List<MenuItem>> getItemsToShow() {
         return itemsToShow;
     }
 
@@ -146,11 +143,6 @@ public class MenuItemsRepository {
                 itemsToShow.setValue(bakeryMenuItems);
                 return bakeryMenuItems;
             }case 7:
-            {
-                itemsToShow.setValue(snacksMenuItems);
-                return snacksMenuItems;
-            }
-            case 8:
             {
                 itemsToShow.setValue(allItems);
                 return allItems;
