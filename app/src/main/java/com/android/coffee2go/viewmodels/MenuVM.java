@@ -12,9 +12,11 @@ import java.util.List;
 public class MenuVM extends ViewModel {
 
     private MenuItemsRepository repository;
+    private TransactionRepository transactionRepository;
 
     public MenuVM() {
         repository = MenuItemsRepository.getInstance();
+        transactionRepository = TransactionRepository.getInstance();
     }
 
     public List<MenuItem> getCategories(){
@@ -35,6 +37,10 @@ public class MenuVM extends ViewModel {
     }
 
     public void addOrderLine(OrderLine orderLine) {
-        TransactionRepository.getInstance().addOrderLine(orderLine);
+        transactionRepository.addOrderLine(orderLine);
+    }
+
+    public void filterItems(String trim) {
+        repository.filterItems(trim);
     }
 }

@@ -80,7 +80,6 @@ public class CartFragment extends Fragment implements OnListItemClickListener {
 
         TextView total = view.findViewById(R.id.cartFragment_Total);
         total.setText(cartVM.getTransactionTotal() + " DKK");
-        orderLineListAdapter.setCartTotalView(total);
 
         cartVM.getTransactionTotal().observe(getViewLifecycleOwner(), number ->{
             total.setText(number.doubleValue()+" DKK");

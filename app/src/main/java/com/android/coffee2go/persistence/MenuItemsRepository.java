@@ -163,4 +163,14 @@ public class MenuItemsRepository {
     public MenuItem getItem(int position) {
         return itemsToShow.getValue().get(position);
     }
+
+    public void filterItems(String trim) {
+        List<MenuItem> items = new ArrayList<>();
+        for (MenuItem m: getAllItems().getValue()) {
+            if (!m.getName().toLowerCase().contains(trim.toLowerCase())){
+                items.add(m);
+            }
+        }
+        itemsToShow.getValue().removeAll(items);
+    }
 }
