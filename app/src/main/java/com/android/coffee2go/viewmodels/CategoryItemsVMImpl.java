@@ -4,9 +4,9 @@ import androidx.lifecycle.ViewModel;
 
 import com.android.coffee2go.models.MenuItem;
 import com.android.coffee2go.models.OrderLine;
-import com.android.coffee2go.persistence.MenuItemsRepository;
-import com.android.coffee2go.persistence.TransactionRepository;
-import java.util.ArrayList;
+import com.android.coffee2go.repository.MenuItemsRepository;
+import com.android.coffee2go.repository.TransactionRepository;
+
 import java.util.List;
 
 public class CategoryItemsVMImpl extends ViewModel implements CategoryItemsVM {

@@ -3,7 +3,9 @@ package com.android.coffee2go.view.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.coffee2go.R;
 import com.android.coffee2go.models.MenuItem;
@@ -15,6 +17,8 @@ public class MenuItemActivity extends AppCompatActivity {
     TextView itemName;
     TextView itemPrice;
     TextView itemQuantity;
+
+    ImageView itemFav;
 
     Button buttonAdd;
     Button buttonRemove;
@@ -42,7 +46,7 @@ public class MenuItemActivity extends AppCompatActivity {
 
         itemIcon.setBackgroundResource(item.getIconId());
         itemName.setText(item.getName());
-        itemPrice.setText(item.getUnitPrice()+" DKK");
+        itemPrice.setText(item.getPrice()+" DKK");
 
         buttonAdd = findViewById(R.id.menu_item_button_add);
         buttonAdd.setOnClickListener(v -> {
@@ -70,6 +74,13 @@ public class MenuItemActivity extends AppCompatActivity {
         buttonAddToCart.setOnClickListener(c -> {
             OrderLine orderLine = new OrderLine(item,quantity);
             menuVM.addOrderLine(orderLine);
+        });
+
+        itemFav = findViewById(R.id.menu_item_favourite);
+        itemFav.setOnClickListener(c -> {
+            itemFav.setImageResource(R.drawable.icon_fav_true);
+            String message = "Item '"+item.getName() + "' was added to your favourites";
+            Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
         });
     }
 }

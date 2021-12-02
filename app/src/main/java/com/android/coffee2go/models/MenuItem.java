@@ -1,31 +1,50 @@
 package com.android.coffee2go.models;
 
-import java.util.ArrayList;
-
 public class MenuItem{
     private String name;
     private int iconId;
-    private double unitPrice;
-    //private ArrayList<Accessory> accessories;
+    private double price;
+    private String path;
+
+    @Override
+    public String toString() {
+        return "MenuItem{" +
+                "name='" + name + '\'' +
+                ", iconId=" + iconId +
+                ", price=" + price +
+                ", path='" + path + '\'' +
+                '}';
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public MenuItem() {
+    }
 
     public MenuItem(String name, int iconId) {
         this.name = name;
         this.iconId = iconId;
-        //accessories = new ArrayList<>();
     }
 
     public MenuItem(String name, int iconId, double unitPrice) {
         this.name = name;
         this.iconId = iconId;
-        this.unitPrice = unitPrice;
+        this.price = unitPrice;
     }
 
     public double getTotal(){
         double accessoryTotal = 0;
-//        for (Accessory u: accessories) {
-//            accessoryTotal += u.getUnitPrice();
-//        }
-        return unitPrice + accessoryTotal;
+        return price + accessoryTotal;
     }
 
     public int getIconId() {
@@ -36,19 +55,12 @@ public class MenuItem{
         return name;
     }
 
-    public double getUnitPrice() {
-        return unitPrice;
+    public double getPrice() {
+        return price;
     }
 
-    public void setUnitPrice(double unitPrice) {
-        this.unitPrice = unitPrice;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
-//    public ArrayList<Accessory> getAccessories() {
-//        return accessories;
-//    }
-//
-//    public void setAccessories(ArrayList<Accessory> accessories) {
-//        this.accessories = accessories;
-//    }
 }

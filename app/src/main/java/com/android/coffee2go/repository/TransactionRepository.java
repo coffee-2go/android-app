@@ -1,4 +1,4 @@
-package com.android.coffee2go.persistence;
+package com.android.coffee2go.repository;
 
 import android.util.Log;
 
@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import com.android.coffee2go.models.OrderLine;
 import com.android.coffee2go.models.Transaction;
-import java.util.ArrayList;
+
 import java.util.List;
 
 public class TransactionRepository {

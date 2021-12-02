@@ -5,7 +5,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
-import com.android.coffee2go.persistence.AccountRepository;
+import com.android.coffee2go.repository.AccountRepository;
 //import androidx.lifecycle.LiveData;
 //
 //import com.google.firebase.auth.FirebaseUser;

@@ -37,7 +37,7 @@ public class MainMenuItemsAdapter extends RecyclerView.Adapter<MainMenuItemsAdap
     public void onBindViewHolder(@NonNull MainMenuItemsAdapter.ViewHolder holder, int position) {
         holder.itemName.setText(items.get(position).getName());
         holder.itemIcon.setBackgroundResource(items.get(position).getIconId());
-        holder.itemPrice.setText(items.get(position).getUnitPrice() +" DKK");
+        holder.itemPrice.setText(items.get(position).getPrice() +" DKK");
     }
 
     @Override

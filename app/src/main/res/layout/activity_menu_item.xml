@@ -37,14 +37,14 @@
             android:id="@+id/menu_item_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="8dp"
             android:gravity="center"
             android:text="Espresso"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/menu_item_icon"
             app:layout_constraintStart_toStartOf="@+id/menu_item_icon"
-            app:layout_constraintTop_toBottomOf="@+id/menu_item_icon" />
+            app:layout_constraintTop_toBottomOf="@+id/menu_item_favourite" />
 
         <TextView
             android:id="@+id/menu_item_description"
@@ -98,6 +98,16 @@
             app:layout_constraintEnd_toEndOf="@+id/menu_item_button_add"
             app:layout_constraintStart_toStartOf="@+id/menu_item_button_remove"
             app:layout_constraintTop_toBottomOf="@+id/menu_item_quantity" />
+
+        <ImageView
+            android:id="@+id/menu_item_favourite"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/menu_item_icon"
+            app:layout_constraintStart_toStartOf="@+id/menu_item_icon"
+            app:layout_constraintTop_toBottomOf="@+id/menu_item_icon"
+            app:srcCompat="@drawable/icon_fav_false" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
