@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/fragment_main_menu"
-        android:name="com.android.coffee2go.view.fragments.MainMenu"
+        android:name="com.android.coffee2go.view.fragments.MainMenuFragment"
         android:label="fragment_main_menu"
         tools:layout="@layout/fragment_main_menu" />
     <fragment

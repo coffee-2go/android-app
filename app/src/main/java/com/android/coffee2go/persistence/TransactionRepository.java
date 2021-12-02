@@ -1,5 +1,7 @@
 package com.android.coffee2go.persistence;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import com.android.coffee2go.models.OrderLine;
@@ -15,30 +17,19 @@ public class TransactionRepository {
 
     private TransactionRepository(){
         currentTransaction = new Transaction();
-
+        Log.i("TRANSACTION REPO","NEW TRANSACTION IS CREATED");
         transactionOrderLines = new MutableLiveData<>();
-        List<OrderLine> orderLines = new ArrayList<>();
-        transactionOrderLines.setValue(orderLines);
+        transactionOrderLines.setValue(currentTransaction.getOrderLines());
 
         transactionTotal = new MutableLiveData<>();
-        Double total = 0.0;
-        transactionTotal.setValue(total);
-    }
-
-    public LiveData<List<OrderLine>> getTransactionOrderLines() {
-        return transactionOrderLines;
+        transactionTotal.setValue(currentTransaction.getTransactionTotal());
     }
 
     public void addOrderLine(OrderLine orderLine) {
-        List<OrderLine> orderLines = transactionOrderLines.getValue();
-        orderLines.add(orderLine);
-        transactionOrderLines.setValue(orderLines);
-
         currentTransaction.addOrderLine(orderLine);
-
-        transactionTotal.setValue(currentTransaction.getTransactionTotal());
-
-        System.out.println("TRANSACTION REPOSITORY: ORDER LINE ADDED");
+        updateLiveData();
+        System.out.println("TRANSACTION REPOSITORY ==> ORDER LINE ADDED, NUMBER OF ORDERS: "
+                +currentTransaction.getOrderLines().size());
     }
 
     public static synchronized TransactionRepository getInstance(){
@@ -49,19 +40,27 @@ public class TransactionRepository {
     }
 
     public void removeOrderLine(int adapterPosition) {
-        List<OrderLine> orderLines = transactionOrderLines.getValue();
-        if (orderLines != null) {
-            orderLines.remove(adapterPosition);
-        }
-        transactionOrderLines.setValue(orderLines);
-        currentTransaction.setOrderLines((ArrayList<OrderLine>) orderLines);
-        transactionTotal.setValue(currentTransaction.getTransactionTotal());
+        currentTransaction.getOrderLines().remove(adapterPosition);
+        updateLiveData();
+        System.out.println("TRANSACTION REPOSITORY ==> ORDER LINE REMOVED, NUMBER OF ORDERS: "
+                +currentTransaction.getOrderLines().size());
     }
 
     public void changeQuantity(int position, int newQuantity){
         currentTransaction.getOrderLines().get(position).setQuantity(newQuantity);
+        updateLiveData();
+        System.out.println("TRANSACTION REPOSITORY ==> ORDER LINE QUANTITY CHANGE, ORDER LINE QUANTITY: "
+                +currentTransaction.getOrderLines().get(position).getQuantity());
+
+    }
+
+    private void updateLiveData() {
         transactionOrderLines.setValue(currentTransaction.getOrderLines());
         transactionTotal.setValue(currentTransaction.getTransactionTotal());
+    }
+
+    public LiveData<List<OrderLine>> getTransactionOrderLines() {
+        return transactionOrderLines;
     }
 
     public LiveData<Double> getTransactionTotal() {

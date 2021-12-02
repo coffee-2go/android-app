@@ -20,7 +20,6 @@ public class OrderLineListAdapter extends RecyclerView.Adapter<OrderLineListAdap
     private List<OrderLine> orderLines;
     final private OnListItemClickListener mOnListItemClickListener;
     private final CartVM cartVM;
-    private TextView cartTotal;
 
     public OrderLineListAdapter(CartVM cartVM,OnListItemClickListener listener){
         orderLines = new ArrayList<>();
@@ -51,9 +50,6 @@ public class OrderLineListAdapter extends RecyclerView.Adapter<OrderLineListAdap
         return orderLines.size();
     }
 
-    public void setCartTotalView(TextView textView) {
-        this.cartTotal = textView;
-    }
 
     public void setItemsToShow(List<OrderLine> items) {
         orderLines = items;
