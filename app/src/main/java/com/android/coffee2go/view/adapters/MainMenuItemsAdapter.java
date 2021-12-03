@@ -27,14 +27,14 @@ public class MainMenuItemsAdapter extends RecyclerView.Adapter<MainMenuItemsAdap
 
     @NonNull
     @Override
-    public MainMenuItemsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.viewholder_menu_items,parent,false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MainMenuItemsAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.itemName.setText(items.get(position).getName());
         holder.itemIcon.setBackgroundResource(items.get(position).getIconId());
         holder.itemPrice.setText(items.get(position).getPrice() +" DKK");

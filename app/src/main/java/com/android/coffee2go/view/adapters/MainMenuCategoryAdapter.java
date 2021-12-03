@@ -27,7 +27,7 @@ public class MainMenuCategoryAdapter extends RecyclerView.Adapter<MainMenuCatego
 
     @NonNull
     @Override
-    public MainMenuCategoryAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.viewholder_category_item,parent,false);
         return new ViewHolder(view);

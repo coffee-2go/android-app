@@ -32,11 +32,11 @@ public class OrderLineListAdapter extends RecyclerView.Adapter<OrderLineListAdap
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.cart_item,parent,false);
-        return new OrderLineListAdapter.ViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull OrderLineListAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         OrderLine cartItem = orderLines.get(position);
         holder.cartItemProductName.setText(cartItem.getProduct().getName());
         holder.cartItemQuantity.setText(cartItem.getQuantity() + "x");
