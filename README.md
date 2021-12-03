@@ -8,25 +8,25 @@ The project idea is a self-ordering app for coffee shops, where users can order 
 
 ## List of Initial Requirements
 - [x] Implemented
-- [ ] To be implemented
+- [ ] Not implemented
 ---
 
 
-- [ ] 1. As a user I want to register, login and logout. 
+- [x] 1. As a user I want to register, login and logout. 
 
-- [ ] 2. As a user, I want to view all available coffee and food options. 
+- [x] 2. As a user, I want to view all available coffee and food options. 
 
-- [ ] 3. As a user, I want to be able to search for products. 
+- [x] 3. As a user, I want to be able to search for products. 
 
-- [ ] 4. As a user, I want to see my profile.
+- [x] 4. As a user, I want to see my profile with my picture and username.
 
-- [ ] 5. As a user, I want to add product to my shopping cart. 
+- [x] 5. As a user, I want to add product to my shopping cart. 
 
-- [ ] 6. As a user, I want to remove products from my cart. 
+- [x] 6. As a user, I want to remove products from my cart. 
 
 - [ ] 7. As a user, I want to select a product to see their available customization options. 
 
-- [ ] 8. As a user, I want to modify a product from my cart. 
+- [x] 8. As a user, I want to modify a product from my cart. 
 
 - [ ] 9. As a user, I want to add my order to my favorite list. 
 
@@ -42,8 +42,10 @@ The project idea is a self-ordering app for coffee shops, where users can order 
 
 - [ ] 15. As a user, I want to see how many calories I consume per time period. 
 
-- [ ] 16. As a user, I want to see a map with my current location and the coffee shop stores around me. 
+- [x] 16. As a user, I want to see a map with my current location and the coffee shop stores around me. 
 
 - [ ] 17. As a user, I want to see the loyalty points I have accumulated.
+
+- [x] 18. As a user, I want to select the time of pick up from a specific location.
 
 
