@@ -43,8 +43,7 @@ public class MenuItem{
     }
 
     public double getTotal(){
-        double accessoryTotal = 0;
-        return price + accessoryTotal;
+        return price;
     }
 
     public int getIconId() {
