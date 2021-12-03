@@ -4,6 +4,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.Manifest;
 import android.app.Activity;
@@ -17,10 +18,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.android.coffee2go.R;
-import com.android.coffee2go.helper.AccountFirebase;
+import com.android.coffee2go.data.FirebaseAuthDAO;
 import com.android.coffee2go.helper.ConfigFirebase;
 import com.android.coffee2go.helper.Permission;
 import com.android.coffee2go.models.Account;
+import com.android.coffee2go.viewmodels.ProfileVM;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -38,9 +40,12 @@ public class EditProfileActivity extends AppCompatActivity {
     private EditText editUsername;
     private TextView editEmail;
     private Button buttonSaveChanges;
+
     private Account loggedAccount;
     private StorageReference storageRef;
     private String idAccount;
+
+    private ProfileVM profileVM;
 
     private String[] necessaryPermissions = new String[] {
             Manifest.permission.READ_EXTERNAL_STORAGE
@@ -50,14 +55,15 @@ public class EditProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
+        profileVM = new ViewModelProvider(this).get(ProfileVM.class);
 
         // validate permissions
         Permission.validatePermissions(necessaryPermissions, this, 1);
 
         // initial config
-        loggedAccount = AccountFirebase.getDataLoggedAccount();
+        loggedAccount = profileVM.getAuthLoggedAccount();
         storageRef = ConfigFirebase.getFirebaseStorage().getReference();
-        idAccount = AccountFirebase.getAccountUid();
+        idAccount = profileVM.getAuthAccountUid();
 
         // config toolbar
         Toolbar toolbar = findViewById(R.id.toolbarMain);
@@ -71,7 +77,7 @@ public class EditProfileActivity extends AppCompatActivity {
         initComponents();
 
         // get account data from loggedAccount
-        FirebaseUser accountProfile = AccountFirebase.getCurrentAccount();
+        FirebaseUser accountProfile = profileVM.getCurrentAccount();
         editUsername.setText(accountProfile.getDisplayName());
         editEmail.setText(accountProfile.getEmail());
 
@@ -88,11 +94,10 @@ public class EditProfileActivity extends AppCompatActivity {
             String updatedUsername = editUsername.getText().toString();
 
             // update username on profile
-            AccountFirebase.updateUsername(updatedUsername);
-
             // update username on realtime-database
+            profileVM.updateUsername(updatedUsername);
             loggedAccount.setUsername(updatedUsername);
-            loggedAccount.update();
+            profileVM.updateAccount(loggedAccount);
 
             Toast.makeText(EditProfileActivity.this,
                     "Account updated successfully!",
@@ -166,11 +171,11 @@ public class EditProfileActivity extends AppCompatActivity {
 
     private void updatePictureAccount(Uri url) {
         // update picture in profile
-        AccountFirebase.updatePictureAccount( url );
+        profileVM.updatePictureAccount( url );
 
         // update picture in firebase
         loggedAccount.setUrlPicture( url.toString() );
-        loggedAccount.update();
+        profileVM.updateAccount(loggedAccount);
 
         Toast.makeText(EditProfileActivity.this,
                 "Your profile picture has been updated!",

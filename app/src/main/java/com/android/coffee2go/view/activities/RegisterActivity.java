@@ -1,6 +1,7 @@
 package com.android.coffee2go.view.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,14 +13,13 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.coffee2go.R;
-import com.android.coffee2go.helper.AccountFirebase;
 import com.android.coffee2go.helper.ConfigFirebase;
 import com.android.coffee2go.models.Account;
+import com.android.coffee2go.viewmodels.RegisterVM;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
-import com.google.firebase.database.DatabaseReference;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -30,64 +30,71 @@ public class RegisterActivity extends AppCompatActivity {
     private ProgressBar progressBar;
 
     private FirebaseAuth mAuth;
-    //private RegisterVM registerVM;
+    private RegisterVM registerVM;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        // initial config
         initComponents();
 
-        // check registration and register
+        registerVM = new ViewModelProvider(this).get(RegisterVM.class);
+
+        // check input and register
         progressBar.setVisibility(View.GONE);
         buttonRegister.setOnClickListener(view -> {
-
-            String username = editUsername.getText().toString().trim();
-            String email = editEmail.getText().toString().trim();
-            String password = editPassword.getText().toString().trim();
-
-            if (!username.isEmpty()) {
-                if (!email.isEmpty()) {
-                    if (!password.isEmpty()) {
-                        if (Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                            if (password.length() >= 6) {
-
-                                Account account = new Account();
-                                account.setUsername(username);
-                                account.setEmail(email);
-                                account.setPassword(password);
-                                register(account);
-
-                            } else {
-                                editPassword.setError("Password must be at least 6 characters long!");
-                                editPassword.requestFocus();
-                            }
-                        } else {
-                            editEmail.setError("Please provide valid email!");
-                            editEmail.requestFocus();
-                        }
-                    } else {
-                        editPassword.setError("Password is required!");
-                        editPassword.requestFocus();
-                    }
-                } else {
-                    editEmail.setError("Email is required!");
-                    editEmail.requestFocus();
-                }
-            } else {
-                editUsername.setError("Username is required!");
-                editUsername.requestFocus();
-            }
+            checkInput();
         });
 
-        //registerVM = new ViewModelProvider(this).get(RegisterVMImpl.class);
+    }
+
+    private void checkInput() {
+        String username = editUsername.getText().toString().trim();
+        String email = editEmail.getText().toString().trim();
+        String password = editPassword.getText().toString().trim();
+
+        if (!username.isEmpty()) {
+            if (!email.isEmpty()) {
+                if (!password.isEmpty()) {
+                    if (Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                        if (password.length() >= 6) {
+
+                            Account account = new Account();
+                            account.setUsername(username);
+                            account.setEmail(email);
+                            account.setPassword(password);
+                            register(account);
+
+                        } else {
+                            editPassword.setError("Password must be at least 6 characters long!");
+                            editPassword.requestFocus();
+                        }
+                    } else {
+                        editEmail.setError("Please provide valid email!");
+                        editEmail.requestFocus();
+                    }
+                } else {
+                    editPassword.setError("Password is required!");
+                    editPassword.requestFocus();
+                }
+            } else {
+                editEmail.setError("Email is required!");
+                editEmail.requestFocus();
+            }
+        } else {
+            editUsername.setError("Username is required!");
+            editUsername.requestFocus();
+        }
     }
 
     private void register(Account account) {
 
         progressBar.setVisibility(View.VISIBLE);
+
         mAuth = ConfigFirebase.getFirebaseAuth();
+
         mAuth.createUserWithEmailAndPassword(
                 account.getEmail(),
                 account.getPassword()
@@ -100,13 +107,12 @@ public class RegisterActivity extends AppCompatActivity {
                         try {
                             progressBar.setVisibility(View.GONE);
 
-                            // Save account in the realtime-database-firebase
+                            // Save account in the realtime firebase
                             String idAccount = task.getResult().getUser().getUid();
                             account.setId(idAccount);
-                            account.save();
 
-                            // Save username in Auth-firebase
-                            AccountFirebase.updateUsername(account.getUsername());
+                            registerVM.save(account);
+
 
                             Toast.makeText(RegisterActivity.this,
                                     "Account created successfully!",

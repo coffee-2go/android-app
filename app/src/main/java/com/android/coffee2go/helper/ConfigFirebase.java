@@ -12,6 +12,7 @@ public class ConfigFirebase {
     private static final String urlFirebaseDatabase = "https://coffee2go-baf44-default-rtdb.europe-west1.firebasedatabase.app/";
 
 
+    // return instance of auth firebase
     public static FirebaseAuth getFirebaseAuth() {
         if (mAuth == null) {
             mAuth = FirebaseAuth.getInstance();

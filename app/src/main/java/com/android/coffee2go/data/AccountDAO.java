@@ -1,62 +1,47 @@
 package com.android.coffee2go.data;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
+import androidx.lifecycle.MutableLiveData;
+import com.android.coffee2go.helper.ConfigFirebase;
 import com.android.coffee2go.models.Account;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
-import java.util.concurrent.atomic.AtomicReference;
-
+import java.util.Map;
 
 public class AccountDAO {
-    private DatabaseReference reference;
+
     private static AccountDAO instance;
 
+    private DatabaseReference firebaseRef;
+
+    private MutableLiveData<Account> account;
+
+
     private AccountDAO() {
-        FirebaseDatabase database = FirebaseDatabase
-                .getInstance("https://coffee2go-baf44-default-rtdb.europe-west1.firebasedatabase.app");
-        reference = database.getReference("accounts");
-
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot child : snapshot.getChildren()){
-                    HashMap<String,String> map = (HashMap<String, String>) child.getValue();
-                    Account account = new Account(map.get("username"),map.get("email"),map.get("password"));
-                    Log.i("ACCOUNT DAO","ACCOUNT: "+account.toString());
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.w("ACCOUNT DAO", "Failed to read value.", error.toException());
-            }
-        });
+        firebaseRef = ConfigFirebase.getDatabaseReference();
     }
 
-    public static synchronized AccountDAO getInstance() {
-        if (instance == null){
+    public static AccountDAO getInstance() {
+        if (instance == null) {
             instance = new AccountDAO();
         }
         return instance;
     }
 
-    public Task<Void> addAccount(Account account){
-        reference.child(account.getUsername()).addListenerForSingleValueEvent(new ValueEventListener() {
+    public MutableLiveData<Account> getDataLoggedAccount() {
+        account = new MutableLiveData<>();
+        DatabaseReference loggedAccountRef;
+        loggedAccountRef = firebaseRef.child("accounts").child(FirebaseAuthDAO.getInstance().getAccountUid());
+        loggedAccountRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()){
-                    Log.i("ACCOUNT DAO","USERNAME ALREADY EXISTS");
-                }
-                else {
-                    reference.child(account.getUsername()).setValue(account);
-                }
+                Account dbAccount = snapshot.getValue( Account.class );
+
+                account.setValue(dbAccount);
+
             }
 
             @Override
@@ -64,27 +49,32 @@ public class AccountDAO {
 
             }
         });
-        return null;
+        return account;
     }
 
-//    public Account getAccount(String id){
-//        final Account[] accounts = {new Account()};
-//        reference.child(id).get().addOnCompleteListener(task -> {
-//            if (!task.isSuccessful()) {
-//                Log.e("firebase", "Error getting data", task.getException());
-//            }
-//            else {
-//                HashMap<String, String> value = (HashMap<String, String>) task.getResult().getValue();
-//                Log.i("ACCOUNT DAO GET ACCOUNT",value.toString());
-//                Account account = new Account();
-//                account.setId(value.get("id"));
-//                account.setUsername(value.get("username"));
-//                account.setUrlPicture(value.get("urlPicture"));
-//                account.setEmail(value.get("email"));
-//                Log.i("ACCOUNT DAO GET ACCOUNT",account.toString());
-//                //account[0] = new Account(map.get("username"), map.get("email"), map.get("password"));
-//            }
-//        });
-//        return accounts[0];
-//    }
+
+
+    public void save(Account account) {
+        firebaseRef.child("accounts").child(account.getId()).setValue(account);
+    }
+
+    public void update(Account account) {
+
+        DatabaseReference accountRef = firebaseRef
+                .child("accounts")
+                .child( account.getId() );
+
+        Map<String, Object> accountData = convertToMap(account);
+        accountRef.updateChildren( accountData );
+    }
+
+    private Map<String, Object> convertToMap(Account account) {
+        HashMap<String, Object> accountMap = new HashMap<>();
+        accountMap.put("id", account.getId());
+        accountMap.put("username", account.getUsername());
+        accountMap.put("email", account.getEmail());
+        accountMap.put("urlPicture", account.getUrlPicture());
+
+        return accountMap;
+    }
 }
