@@ -2,6 +2,13 @@
 
 Android application written in Java for AND1 university course assignment.
 
+Youtube video presentation link: https://youtu.be/28HRMqzElTI
+
+App made by:
+Lucas Krause Saldanha
+Michal Pupák
+Mihail-Alexandru Teodosiu
+
 ## About
 The project idea is a self-ordering app for coffee shops, where users can order their coffee in advance from a shop near them.
 
