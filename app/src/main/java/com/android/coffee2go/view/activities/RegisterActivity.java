@@ -1,8 +1,11 @@
 package com.android.coffee2go.view.activities;
 
+<<<<<<< HEAD
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+=======
+>>>>>>> f681c06 (Google Maps)
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -12,10 +15,15 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.coffee2go.R;
 import com.android.coffee2go.helper.ConfigFirebase;
 import com.android.coffee2go.models.Account;
+<<<<<<< HEAD
 import com.android.coffee2go.viewmodels.RegisterVM;
+=======
+>>>>>>> f681c06 (Google Maps)
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;

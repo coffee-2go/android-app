@@ -16,6 +16,7 @@
     <string name="username">Username</string>
     <string name="logout">Logout</string>
     <string name="edit_profile">Edit Profile</string>
+<<<<<<< HEAD
     <string name="action_search">Search for menu item...</string>
     <string name="search_item">Search item here...</string>
     <string name="editProfile_username">Username:</string>
@@ -23,4 +24,15 @@
     <string name="editProfile_save_changes">Save changes</string>
     <string name="editProfile_usernameHint">Username</string>
     <string name="editProfile_email">Email</string>
+=======
+    <string name="title_activity_shops">ShopsActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+>>>>>>> f681c06 (Google Maps)
 </resources>

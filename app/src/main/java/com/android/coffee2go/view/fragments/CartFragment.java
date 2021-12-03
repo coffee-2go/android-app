@@ -1,10 +1,18 @@
 package com.android.coffee2go.view.fragments;
 
 import android.os.Bundle;
+<<<<<<< HEAD
+=======
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+>>>>>>> f681c06 (Google Maps)
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+<<<<<<< HEAD
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +21,12 @@ import com.android.coffee2go.R;
 import com.android.coffee2go.viewmodels.CartVM;
 import com.android.coffee2go.viewmodels.CartVMImpl;
 import com.android.coffee2go.viewmodels.OnListItemClickListener;
+=======
+
+import com.android.coffee2go.R;
+>>>>>>> f681c06 (Google Maps)
 import com.android.coffee2go.view.adapters.OrderLineListAdapter;
+import com.android.coffee2go.viewmodels.OnListItemClickListener;
 
 /**
  * A simple {@link Fragment} subclass.
