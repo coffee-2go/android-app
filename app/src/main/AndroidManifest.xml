@@ -9,7 +9,7 @@
 
 <application android:theme="@style/Theme.Coffee2go" android:supportsRtl="true" android:roundIcon="@mipmap/ic_launcher_coffee2go_logo_round" android:label="@string/app_name" android:icon="@mipmap/ic_launcher_coffee2go_icon_logo" android:fullBackupContent="true" android:allowBackup="true">
 
-    <activity android:name=".view.activities.ShopAndTimeActivity" android:exported="true"/>
+    <activity android:name=".view.activities.ShopAndTimeActivity" android:exported="false" android:parentActivityName=".view.activities.MainActivity"/>
 
     <activity android:name=".view.activities.EditProfileActivity" android:exported="false" android:parentActivityName=".view.activities.MainActivity"/>
 

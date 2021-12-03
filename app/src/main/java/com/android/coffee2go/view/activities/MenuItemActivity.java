@@ -1,6 +1,8 @@
 package com.android.coffee2go.view.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -53,6 +55,7 @@ public class MenuItemActivity extends AppCompatActivity {
             ++quantity;
             buttonAddToCart.setEnabled(true);
             itemQuantity.setText(String.valueOf(quantity));
+
         });
 
         buttonRemove = findViewById(R.id.menu_item_button_remove);
@@ -72,8 +75,11 @@ public class MenuItemActivity extends AppCompatActivity {
         }
 
         buttonAddToCart.setOnClickListener(c -> {
+            Toast.makeText(getBaseContext(), "Added "+ itemQuantity.getText() +" "+itemName.getText(),
+                    Toast.LENGTH_LONG).show();
             OrderLine orderLine = new OrderLine(item,quantity);
             menuVM.addOrderLine(orderLine);
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
         });
 
         itemFav = findViewById(R.id.menu_item_favourite);

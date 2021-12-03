@@ -91,4 +91,9 @@ public class ShopAndTimeActivity extends AppCompatActivity {
         time = findViewById(R.id.timetextview);
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return false;
+    }
 }
