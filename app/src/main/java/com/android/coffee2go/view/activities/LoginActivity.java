@@ -1,7 +1,7 @@
 package com.android.coffee2go.view.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,7 +12,6 @@ import android.widget.Toast;
 import com.android.coffee2go.R;
 import com.android.coffee2go.helper.ConfigFirebase;
 import com.android.coffee2go.models.Account;
-import com.android.coffee2go.viewmodels.LoginActivityVM;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
@@ -25,8 +24,6 @@ public class LoginActivity extends AppCompatActivity {
     private Account account;
     private FirebaseAuth auth;
 
-    private LoginActivityVM viewModel;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +31,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         verifyLoggedAccount();
         initComponents();
-
-        viewModel = new ViewModelProvider(this).get(LoginActivityVM.class);
-        viewModel.init();
 
         // register
         buttonRegister.setOnClickListener(view -> {
@@ -71,6 +65,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void validateLogin(Account account) {
         progressBar.setVisibility(View.VISIBLE);
+
         auth = ConfigFirebase.getFirebaseAuth();
         auth.signInWithEmailAndPassword(
                 account.getEmail(),

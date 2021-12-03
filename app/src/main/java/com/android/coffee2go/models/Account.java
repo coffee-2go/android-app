@@ -28,34 +28,6 @@ public class Account {
         this.password = password;
     }
 
-    public void save() {
-        DatabaseReference firebaseRef = ConfigFirebase.getDatabaseReference();
-        DatabaseReference accountRef = firebaseRef.child("accounts").child(getId());
-        accountRef.setValue(this);
-    }
-
-    public void update() {
-        // should do by the id
-
-        DatabaseReference firebaseRef = ConfigFirebase.getDatabaseReference();
-        DatabaseReference accountRef = firebaseRef
-                .child("accounts")
-                .child( getId() );
-
-        Map<String, Object> accountData = convertToMap();
-        accountRef.updateChildren( accountData );
-    }
-
-    public Map<String, Object> convertToMap() {
-        HashMap<String, Object> accountMap = new HashMap<>();
-        accountMap.put("email", getEmail());
-        accountMap.put("username", getUsername());
-        accountMap.put("id", getId());
-        accountMap.put("urlPicture", getUrlPicture());
-
-        return accountMap;
-    }
-
     public String getId() {
         return id;
     }
