@@ -25,13 +25,6 @@
             android:name=".view.activities.MenuItemActivity"
             android:exported="false" />
         <activity
-            android:name=".view.activities.CategoryItemsActivity"
-            android:exported="false"
-            android:parentActivityName=".view.activities.MainActivity"/>
-        <activity
-            android:name=".view.activities.MenuActivity"
-            android:exported="false" />
-        <activity
             android:name=".view.activities.RegisterActivity"
             android:exported="false" />
         <activity

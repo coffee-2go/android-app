@@ -23,7 +23,7 @@ public class MenuItemsRepository {
 
     private MutableLiveData<List<MenuItem>> itemsToShow;
 
-
+    // TODO move menu items to the database
     private MenuItemsRepository(){
 //        bakeryMenuItems = MenuItemsDAO.getInstance().GetMenuItems("Bakery");
 //        breakfastMenuItems = MenuItemsDAO.getInstance().GetMenuItems("Breakfast");

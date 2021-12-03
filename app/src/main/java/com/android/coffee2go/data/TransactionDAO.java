@@ -1,5 +1,6 @@
 package com.android.coffee2go.data;
 
+import com.android.coffee2go.helper.ConfigFirebase;
 import com.android.coffee2go.models.Transaction;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
@@ -10,9 +11,7 @@ public class TransactionDAO {
     private static TransactionDAO instance;
 
     private TransactionDAO(){
-        FirebaseDatabase database = FirebaseDatabase
-                .getInstance("https://coffee2go-baf44-default-rtdb.europe-west1.firebasedatabase.app");
-        reference = database.getReference(Transaction.class.getSimpleName());
+        reference = ConfigFirebase.getDatabaseReference().child(Transaction.class.getSimpleName());
     }
 
     public static TransactionDAO getInstance(){
@@ -23,6 +22,6 @@ public class TransactionDAO {
     }
 
     public Task<Void> addTransaction(Transaction transaction){
-        return reference.push().setValue(transaction);
+        return reference.child(FirebaseAuthDAO.getInstance().getAccountUid()).push().setValue(transaction);
     }
 }
