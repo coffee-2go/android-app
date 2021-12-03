@@ -41,14 +41,6 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-//        profileVM = new ViewModelProvider(this).get(ProfileVM.class);
-//
-//        profileVM.getDataLoggedAccount().observe(getViewLifecycleOwner(), account -> {
-//
-//            showAccountPicture(account);
-//            showUsername(account);
-//        });
     }
 
     @Override
