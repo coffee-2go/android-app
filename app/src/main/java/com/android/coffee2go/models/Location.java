@@ -2,22 +2,20 @@ package com.android.coffee2go.models;
 
 import com.google.android.gms.maps.model.LatLng;
 
-/**
- * @author Alex
- */
 public class Location {
     private String shopName;
     private LatLng coordinates;
     private String address;
 
-    public Location(String shopName, LatLng coordinates, String address) {
+//    public Location(String shopName, LatLng coordinates, String address) {
+//        this.shopName = shopName;
+//        this.coordinates = coordinates;
+//        this.address = address;
+//    }
+
+    public Location(String shopName, LatLng coordinates) {
         this.shopName = shopName;
         this.coordinates = coordinates;
-        this.address = address;
-    }
-
-    public Location(String shopName) {
-        this.shopName = shopName;
     }
 
     public String getShopName() {

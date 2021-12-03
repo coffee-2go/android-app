@@ -1,7 +1,10 @@
 package com.android.coffee2go.view.activities;
 
+<<<<<<< HEAD
 import androidx.appcompat.app.AppCompatActivity;
 
+=======
+>>>>>>> f681c06 (Google Maps)
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,9 +12,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.android.coffee2go.R;
 import com.android.coffee2go.helper.ConfigFirebase;
 import com.android.coffee2go.models.Account;
+<<<<<<< HEAD
+=======
+import com.android.coffee2go.viewmodels.LoginActivityVM;
+>>>>>>> f681c06 (Google Maps)
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {

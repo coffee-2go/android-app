@@ -1,13 +1,18 @@
 package com.android.coffee2go.data;
 
 import androidx.annotation.NonNull;
+<<<<<<< HEAD
 import androidx.lifecycle.MutableLiveData;
 import com.android.coffee2go.helper.ConfigFirebase;
+=======
+
+>>>>>>> f681c06 (Google Maps)
 import com.android.coffee2go.models.Account;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+
 import java.util.HashMap;
 import java.util.Map;
 

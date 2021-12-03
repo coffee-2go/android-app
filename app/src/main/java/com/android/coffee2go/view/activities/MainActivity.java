@@ -1,5 +1,6 @@
 package com.android.coffee2go.view.activities;
 
+<<<<<<< HEAD
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -7,11 +8,23 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+=======
+>>>>>>> f681c06 (Google Maps)
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+<<<<<<< HEAD
+=======
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+>>>>>>> f681c06 (Google Maps)
 import com.android.coffee2go.R;
 import com.android.coffee2go.helper.ConfigFirebase;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -52,11 +65,39 @@ public class MainActivity extends AppCompatActivity {
 
         if (navHostFragment != null) {
 
+<<<<<<< HEAD
             NavController navController = navHostFragment.getNavController();
 
             // Setup NavigationUI here
             NavigationUI.setupWithNavController(bottomNavigationView, navController);
         }
+=======
+    public void enableNavigation(BottomNavigationView view){
+        view.setOnItemSelectedListener(item -> {
+
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            int itemId = item.getItemId();
+            if (itemId == R.id.menuFragment) {
+                fragmentTransaction.replace(R.id.viewPager, new MenuFragment()).commit();
+                return true;
+            } else if (itemId == R.id.cartFragment) {
+                fragmentTransaction.replace(R.id.viewPager, new CartFragment()).commit();
+                return true;
+            } else if (itemId == R.id.locationFragment) {
+//                startActivity(new Intent(getApplicationContext(), MapsActivity.class));
+//                finish();
+                fragmentTransaction.replace(R.id.viewPager, new LocationFragment()).commit();
+                return true;
+            } else if (itemId == R.id.profileFragment) {
+                fragmentTransaction.replace(R.id.viewPager, new ProfileFragment()).commit();
+                return true;
+            }
+            // if no fragment is committed, then return false
+            return false;
+        });
+>>>>>>> f681c06 (Google Maps)
     }
 
 

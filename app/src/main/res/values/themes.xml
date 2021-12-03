@@ -14,6 +14,7 @@
         <!-- Customize your theme here. -->
     </style>
 
+<<<<<<< HEAD
 
     <!-- Login page theme. -->
     <style name="Theme.Coffee2go.Login" parent="Theme.MaterialComponents.DayNight.NoActionBar">
@@ -30,4 +31,14 @@
         <!-- Secondary brand color. -->
         <!-- Status bar color. -->
     </style>
+=======
+    <style name="Theme.Coffee2go.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.Coffee2go.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.Coffee2go.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+>>>>>>> f681c06 (Google Maps)
 </resources>

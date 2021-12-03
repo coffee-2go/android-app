@@ -2,7 +2,6 @@ package com.android.coffee2go.data;
 
 import com.android.coffee2go.models.Account;
 import com.android.coffee2go.models.Location;
-import com.android.coffee2go.models.Transaction;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
