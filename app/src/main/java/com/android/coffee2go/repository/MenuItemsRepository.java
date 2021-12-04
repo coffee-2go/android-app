@@ -45,6 +45,8 @@ public class MenuItemsRepository {
 
         hotCoffeeMenuItems = new ArrayList<>();
         hotCoffeeMenuItems.add(new MenuItem("Cappuccino",R.drawable.cappuccino,35));
+        hotCoffeeMenuItems.add(new MenuItem("Caffe Latte",R.drawable.latte,25));
+        hotCoffeeMenuItems.add(new MenuItem("Chai Latte",R.drawable.chai_latte,30));
         hotCoffeeMenuItems.add(new MenuItem("Espresso",R.drawable.espresso,25));
         hotCoffeeMenuItems.add(new MenuItem("Caffe Americano",R.drawable.caffe_americano,40));
         hotCoffeeMenuItems.add(new MenuItem("Caffe Misto",R.drawable.caffe_misto,30));
